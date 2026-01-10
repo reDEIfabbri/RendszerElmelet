@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rendszerelmélet 2025 - Teljes Vizsgaanyag (Javított)</title>
-    
+    <title>Rendszerelmélet 2025 - Teljes Vizsgaanyag</title>
+
     <script>
         window.MathJax = {
             tex: {
@@ -113,7 +113,7 @@
         }
 
         h2 { margin: 0; color: var(--primary); font-size: 1.5rem; }
-        
+
         .req-badge {
             background-color: var(--def-bg);
             color: var(--text);
@@ -126,12 +126,12 @@
             display: inline-block;
         }
 
-        h3 { 
-            font-size: 1.15rem; 
-            margin-top: 25px; 
-            color: var(--text); 
-            border-left: 3px solid var(--accent); 
-            padding-left: 10px; 
+        h3 {
+            font-size: 1.15rem;
+            margin-top: 25px;
+            color: var(--text);
+            border-left: 3px solid var(--accent);
+            padding-left: 10px;
         }
 
         .formula-box {
@@ -183,33 +183,33 @@
             <h2>1. Jelek és Rendszerek, Konvolúció</h2>
             <span>Tétel 1</span>
         </div>
-        [cite_start]<div class="req-badge">Kulcs: Jelek típusai, Linearitás, Időinvariancia, Általánosított derivált, Konvolúció [cite: 2, 3, 4]</div>
+        <div class="req-badge">Kulcs: Jelek típusai, Linearitás, Időinvariancia, Általánosított derivált, Konvolúció</div>
 
         <h3>Fontosabb jelek és tulajdonságaik</h3>
         <ul>
-            <li><strong>Egységugrás ($\varepsilon(t)$):</strong> Bekapcsolási folyamat. [cite_start]$\varepsilon(t) = 1$, ha $t>0$, különben 0. [cite: 3]</li>
+            <li><strong>Egységugrás ($\varepsilon(t)$):</strong> Bekapcsolási folyamat. [cite_start]$\varepsilon(t) = 1$, ha $t>0$, különben 0[cite: 3].</li>
             <li><strong>Egységimpulzus / Dirac ($\delta(t)$):</strong>
                 $$ \int_{-\infty}^{\infty} x(t)\delta(t) dt = x(0) $$
-                Szitáló tulajdonság. [cite_start]Az egységugrás deriváltja. [cite: 3]</li>
+                Szitáló tulajdonság. [cite_start]Az egységugrás deriváltja[cite: 3].</li>
             <li><strong>Exponenciális jel ($e^{st}$):</strong> Az LTI rendszerek sajátfüggvénye.</li>
         </ul>
 
         <h3>Rendszerek tulajdonságai</h3>
         <ul>
-            <li><strong>Linearitás:</strong> Szuperpozíció elve (Additivitás + Homogenitás). [cite_start]Ha $y_1 = T(u_1)$ és $y_2 = T(u_2)$, akkor $T(c_1 u_1 + c_2 u_2) = c_1 y_1 + c_2 y_2$. [cite: 3]</li>
-            <li><strong>Időinvariancia:</strong> A válasz nem függ a bekapcsolás időpontjától. [cite_start]$y(t-\tau) = T(u(t-\tau))$. [cite: 3]</li>
-            <li><strong>Stabilitás (BIBO):</strong> Korlátos bemenetre korlátos kimenet. [cite_start]Feltétele: $\int_{-\infty}^{\infty} |h(t)| dt < \infty$. [cite: 3]</li>
+            <li><strong>Linearitás:</strong> Szuperpozíció elve (Additivitás + Homogenitás). [cite_start]Ha $y_1 = T(u_1)$ és $y_2 = T(u_2)$, akkor $T(c_1 u_1 + c_2 u_2) = c_1 y_1 + c_2 y_2$[cite: 3].</li>
+            <li><strong>Időinvariancia:</strong> A válasz nem függ a bekapcsolás időpontjától. [cite_start]$y(t-\tau) = T(u(t-\tau))$[cite: 3].</li>
+            <li><strong>Stabilitás (BIBO):</strong> Korlátos bemenetre korlátos kimenet. [cite_start]Feltétele: $\int_{-\infty}^{\infty} |h(t)| dt < \infty$[cite: 3].</li>
         </ul>
 
         <h3>Általánosított derivált</h3>
-        <p>Szakadással rendelkező jelek (pl. ugrás) deriváltja hagyományosan nem létezik, de elosztás (disztribúció) értelemben igen. Ha $f(t)$-nek $t_0$-ban $K$ nagyságú ugrása van:</p>
+        <p>Szakadással rendelkező jelek (pl. ugrás) deriváltja hagyományosan nem létezik, de elosztás (disztribúció) értelemben igen. [cite_start]Ha $f(t)$-nek $t_0$-ban $K$ nagyságú ugrása van[cite: 4]:</p>
         <div class="formula-box">
             $$ f'_{alt}(t) = \{f'(t)\} + K \cdot \delta(t-t_0) $$
         </div>
-        [cite_start]<p>Alkalmazás: Átmeneti függvényből ($v(t)$) súlyfüggvény ($h(t)$) számítása: $h(t) = \dot{v}(t)$. [cite: 4]</p>
+        <p>Alkalmazás: Átmeneti függvényből ($v(t)$) súlyfüggvény ($h(t)$) számítása: $h(t) = \dot{v}(t)$.</p>
 
         <h3>Konvolúció származtatása és fogalma</h3>
-        <p>LTI rendszereknél a bemenetet elemi impulzusokra bontjuk. A rendszer válasza az elemi impulzusválaszok ($h(t)$) összege.</p>
+        <p>LTI rendszereknél a bemenetet elemi impulzusokra bontjuk. [cite_start]A rendszer válasza az elemi impulzusválaszok ($h(t)$) összege[cite: 4].</p>
         <ul>
             <li><strong>Konvolúciós integrál (Folytonos):</strong>
                 $$ y(t) = \int_{-\infty}^{\infty} u(\tau) h(t-\tau) d\tau $$
@@ -218,7 +218,7 @@
                 $$ y[n] = \sum_{k=-\infty}^{\infty} u[k] h[n-k] $$
             </li>
         </ul>
-        [cite_start]<p>Tulajdonságai: Kommutatív, Asszociatív, Disztributív. [cite: 4]</p>
+        [cite_start]<p>Tulajdonságai: Kommutatív, Asszociatív, Disztributív[cite: 4].</p>
     </div>
 
     <div class="topic-card">
@@ -229,17 +229,17 @@
         [cite_start]<div class="req-badge">Kulcs: Állapotváltozós leírás, Bode, Nyquist, Sajátértékek [cite: 5-10]</div>
 
         <h3>Állapotváltozós leírás és Jelfolyam hálózat</h3>
-        <p>A rendszer belső dinamikájának leírása $n$ db elsőrendű differenciálegyenlettel.</p>
+        [cite_start]<p>A rendszer belső dinamikájának leírása $n$ db elsőrendű differenciálegyenlettel[cite: 5].</p>
         <div class="formula-box">
             $$ \dot{\mathbf{x}}(t) = \mathbf{A}\mathbf{x}(t) + \mathbf{B}u(t) $$
             $$ y(t) = \mathbf{C}\mathbf{x}(t) + \mathbf{D}u(t) $$
         </div>
-        <p><strong>Sajátértékek szerepe:</strong> Az $\mathbf{A}$ mátrix sajátértékei ($\lambda_i$) határozzák meg a stabilitást. [cite_start]Ha minden $\text{Re}(\lambda_i) < 0$, a rendszer stabil. [cite: 7]</p>
+        <p><strong>Sajátértékek szerepe:</strong> Az $\mathbf{A}$ mátrix sajátértékei ($\lambda_i$) határozzák meg a stabilitást. [cite_start]Ha minden $\text{Re}(\lambda_i) < 0$, a rendszer stabil[cite: 7].</p>
 
         <h3>Átviteli karakterisztika</h3>
-        <p>Szinuszos gerjesztésre a válasz amplitúdója és fázisa változik.
+        [cite_start]<p>Szinuszos gerjesztésre a válasz amplitúdója és fázisa változik[cite: 6].
            $$ H(j\omega) = |H(j\omega)| e^{j\varphi(\omega)} $$
-           [cite_start]Ábrázolás: <strong>Bode-diagram</strong> (dB amplitúdó és fázis külön) vagy <strong>Nyquist-diagram</strong> (komplex síkon). [cite: 6, 9]</p>
+           [cite_start]Ábrázolás: <strong>Bode-diagram</strong> (dB amplitúdó és fázis külön) vagy <strong>Nyquist-diagram</strong> (komplex síkon)[cite: 9].</p>
     </div>
 
     <div class="topic-card">
@@ -250,20 +250,20 @@
         [cite_start]<div class="req-badge">Kulcs: Fourier-sor, Fourier-trafó, Spektrum, Sávszélesség [cite: 11-14]</div>
 
         <h3>Fourier-sor (Periodikus jelek)</h3>
-        <p>Periodikus jelek felbonthatók harmonikusok összegére. Spektruma vonalas.</p>
+        <p>Periodikus jelek felbonthatók harmonikusok összegére. [cite_start]Spektruma vonalas[cite: 12].</p>
         <div class="formula-box">
             $$ x(t) = \sum_{k=-\infty}^{\infty} C_k e^{j k \omega_0 t} $$
         </div>
 
         <h3>Fourier-transzformáció (Aperiodikus jelek)</h3>
-        <p>A spektrum folytonossá válik.</p>
+        [cite_start]<p>A spektrum folytonossá válik[cite: 13].</p>
         <div class="formula-box">
             $$ X(j\omega) = \int_{-\infty}^{\infty} x(t) e^{-j\omega t} dt $$
         </div>
-        
+
         <h3>Alakhű jelátvitel és Sávszélesség</h3>
         <p>Alakhű átvitel feltétele: konstans amplitúdó-átvitel és lineáris fázis.
-           [cite_start]Sávszélesség: Az a tartomány, ahol az átvitel nem csökken 3 dB alá. [cite: 14]</p>
+           [cite_start]Sávszélesség: Az a tartomány, ahol az átvitel nem csökken 3 dB alá[cite: 14].</p>
     </div>
 
     <div class="topic-card">
@@ -274,12 +274,12 @@
         [cite_start]<div class="req-badge">Kulcs: Shannon-tétel, Operátoros megoldás [cite: 15-18]</div>
 
         <h3>Mintavételezés</h3>
-        <p><strong>Shannon-tétel:</strong> $f_s > 2 f_{max}$. [cite_start]Ha nem teljesül, a spektrumok átlapolódnak (aliasing). [cite: 16]</p>
+        <p><strong>Shannon-tétel:</strong> $f_s > 2 f_{max}$. [cite_start]Ha nem teljesül, a spektrumok átlapolódnak (aliasing)[cite: 16].</p>
 
         <h3>LI Rendszeregyenlet operátoros megoldása</h3>
-        <p>Laplace-transzformációval a differenciálegyenlet algebrai egyenletté válik ($s$ változó).
+        [cite_start]<p>Laplace-transzformációval a differenciálegyenlet algebrai egyenletté válik ($s$ változó)[cite: 18].
            $$ L\{\dot{y}(t)\} = sY(s) - y(0) $$
-           [cite_start]Megoldás menete: Transzformálás $\to$ Átrendezés $Y(s)$-re $\to$ Inverz transzformáció (Parciális törtekre bontás). [cite: 18]</p>
+           [cite_start]Megoldás menete: Transzformálás $\to$ Átrendezés $Y(s)$-re $\to$ Inverz transzformáció (Parciális törtekre bontás)[cite: 18].</p>
     </div>
 
     <div class="topic-card">
@@ -290,9 +290,9 @@
         [cite_start]<div class="req-badge">Kulcs: DFT, DTFT, Z-transzformáció [cite: 19-21]</div>
 
         <h3>Z-transzformáció</h3>
-        <p>A Laplace diszkrét megfelelője ($z$ változó).
+        [cite_start]<p>A Laplace diszkrét megfelelője ($z$ változó)[cite: 21].
            $$ X(z) = \sum_{n=-\infty}^{\infty} x[n] z^{-n} $$
-           [cite_start]Kapcsolat a DTFT-vel: Ha $z$ az egységkörön van ($z=e^{j\Omega}$), akkor a Z-transzformált megegyezik a DTFT-vel (spektrummal). [cite: 21]</p>
+           [cite_start]Kapcsolat a DTFT-vel: Ha $z$ az egységkörön van ($z=e^{j\Omega}$), akkor a Z-transzformált megegyezik a DTFT-vel (spektrummal)[cite: 21].</p>
     </div>
 
     <div class="topic-card">
@@ -304,14 +304,14 @@
 
         <h3>Vezérlés és Szabályozás</h3>
         <ul>
-            <li><strong>Vezérlés:</strong> Nyílt lánc, nincs visszacsatolás, nem kompenzálja a zavarást.</li>
-            [cite_start]<li><strong>Szabályozás:</strong> Zárt kör (negatív visszacsatolás), a hibajelet ($e=r-y$) csökkenti. [cite: 23]</li>
+            [cite_start]<li><strong>Vezérlés:</strong> Nyílt lánc, nincs visszacsatolás, nem kompenzálja a zavarást[cite: 23].</li>
+            [cite_start]<li><strong>Szabályozás:</strong> Zárt kör (negatív visszacsatolás), a hibajelet ($e=r-y$) csökkenti[cite: 23].</li>
         </ul>
 
         <h3>Modellközelítés PT1H szakasszal</h3>
-        <p>Ismeretlen szakasz ugrásválasza alapján közelíthető egy Egytárolós (PT1) + Holtidős (H) taggal:
+        [cite_start]<p>Ismeretlen szakasz ugrásválasza alapján közelíthető egy Egytárolós (PT1) + Holtidős (H) taggal[cite: 25]:
            $$ W(s) = \frac{A}{1+sT}e^{-sT_h} $$
-           [cite_start]Ahol $A$ az erősítés, $T$ az időállandó, $T_h$ a holtidő. [cite: 25]</p>
+           Ahol $A$ az erősítés, $T$ az időállandó, $T_h$ a holtidő.</p>
     </div>
 
     <div class="topic-card">
@@ -322,11 +322,11 @@
         [cite_start]<div class="req-badge">Kulcs: Nyquist-kritérium, Tartalékok [cite: 28-31]</div>
 
         <h3>Negatív visszacsatolás</h3>
-        [cite_start]<p>Csökkenti az erősítést, növeli a sávszélességet, stabilizál. [cite: 30]</p>
+        [cite_start]<p>Csökkenti az erősítést, növeli a sávszélességet, stabilizál[cite: 30].</p>
 
         <h3>Nyquist-kritérium és Tartalékok</h3>
-        <p>Stabil a zárt kör, ha a felnyitott kör Nyquist-diagramja <strong>nem veszi körül a $(-1; 0)$ pontot</strong>.
-           [cite_start]<strong>Fázistartalék:</strong> Mennyit késhet még a rendszer a gerjedésig ($180^\circ$-ig) a vágási frekvencián. [cite: 31]</p>
+        [cite_start]<p>Stabil a zárt kör, ha a felnyitott kör Nyquist-diagramja <strong>nem veszi körül a $(-1; 0)$ pontot</strong>[cite: 31].
+           [cite_start]<strong>Fázistartalék:</strong> Mennyit késhet még a rendszer a gerjedésig ($180^\circ$-ig) a vágási frekvencián[cite: 31].</p>
     </div>
 
     <div class="topic-card">
@@ -340,12 +340,12 @@
         <div class="formula-box">
             $$ u(t) = K_P \left( e(t) + \frac{1}{T_I}\int e(t)dt + T_D \frac{de(t)}{dt} \right) $$
         </div>
-        [cite_start]<p><strong>Aktuátor telítés (Windup):</strong> Ha a beavatkozó telítésbe megy, az integrátor tovább töltődik ("elszáll"), ami túllendülést okoz. [cite: 34]</p>
+        [cite_start]<p><strong>Aktuátor telítés (Windup):</strong> Ha a beavatkozó telítésbe megy, az integrátor tovább töltődik ("elszáll"), ami túllendülést okoz[cite: 34].</p>
 
         <h3>Típusszám és Maradó hiba</h3>
-        <p>A felnyitott kör integrátorainak száma ($i$) határozza meg a hibát alapjelkövetéskor:
+        [cite_start]<p>A felnyitott kör integrátorainak száma ($i$) határozza meg a hibát alapjelkövetéskor[cite: 35]:
            Ha $i=0$: Egységugrásra van hiba.
-           [cite_start]Ha $i=1$: Egységugrásra 0 hiba, Sebességugrásra van hiba. [cite: 35]</p>
+           Ha $i=1$: Egységugrásra 0 hiba, Sebességugrásra van hiba.</p>
     </div>
 
     <div class="topic-card">
@@ -356,12 +356,12 @@
         [cite_start]<div class="req-badge">Kulcs: Derivált szűrése, Lambda-tuning [cite: 36-39]</div>
 
         <h3>Derivált szűrése</h3>
-        [cite_start]<p>A zajelnyomás miatt a D-tagot szűrni kell ($T_f$ időállandóval): $ \frac{sT_D}{1+sT_f} $. [cite: 38]</p>
+        [cite_start]<p>A zajelnyomás miatt a D-tagot szűrni kell ($T_f$ időállandóval): $ \frac{sT_D}{1+sT_f} $[cite: 38].</p>
 
         <h3>Hangolási módszerek</h3>
         <ul>
-            <li><strong>Ziegler-Nichols:</strong> Kísérleti (lengési) módszer.</li>
-            <li><strong>Lambda-tuning:</strong> Modell alapú. [cite_start]A kívánt zárt kör időállandót ($\lambda$) adjuk meg, és a szakasz pólusát kiejtjük a szabályozó zérusával. [cite: 39]</li>
+            [cite_start]<li><strong>Ziegler-Nichols:</strong> Kísérleti (lengési) módszer[cite: 39].</li>
+            <li><strong>Lambda-tuning:</strong> Modell alapú. [cite_start]A kívánt zárt kör időállandót ($\lambda$) adjuk meg, és a szakasz pólusát kiejtjük a szabályozó zérusával[cite: 39].</li>
         </ul>
     </div>
 
