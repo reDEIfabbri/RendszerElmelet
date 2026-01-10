@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rendszerelmélet 2025 - Teljes Vizsgaanyag (Javított)</title>
+    
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --accent: #f59e0b;
+            --bg: #f3f4f6;
+            --text: #1f2937;
+            --card-bg: #ffffff;
+            --border: #e5e7eb;
+            --code-bg: #f8fafc;
+            --header-grad-1: #3b82f6;
+            --header-grad-2: #1d4ed8;
+            --table-head: #eff6ff;
+            --def-bg: #ecfdf5;
+            --def-border: #10b981;
+        }
+
+        [data-theme="dark"] {
+            --primary: #60a5fa;
+            --secondary: #3b82f6;
+            --accent: #fbbf24;
+            --bg: #111827;
+            --text: #e5e7eb;
+            --card-bg: #1f2937;
+            --border: #374151;
+            --code-bg: #111827;
+            --header-grad-1: #1e3a8a;
+            --header-grad-2: #172554;
+            --table-head: #374151;
+            --def-bg: #064e3b;
+            --def-border: #34d399;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .container { max-width: 950px; margin: 0 auto; }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, var(--header-grad-1), var(--header-grad-2));
+            color: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .theme-toggle:hover { background: rgba(255, 255, 255, 0.3); }
+
+        h1 { margin: 0; font-size: 2.2rem; }
+        .subtitle { display: block; margin-top: 10px; font-weight: 300; opacity: 0.9; }
+
+        .topic-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border);
+            border-left: 5px solid var(--primary);
+        }
+
+        .topic-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        h2 { margin: 0; color: var(--primary); font-size: 1.5rem; }
+        
+        .req-badge {
+            background-color: var(--def-bg);
+            color: var(--text);
+            border: 1px solid var(--def-border);
+            font-size: 0.8rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        h3 { 
+            font-size: 1.15rem; 
+            margin-top: 25px; 
+            color: var(--text); 
+            border-left: 3px solid var(--accent); 
+            padding-left: 10px; 
+        }
+
+        .formula-box {
+            background: var(--code-bg);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            font-family: 'Latin Modern Math', serif;
+            color: var(--text);
+        }
+
+        ul { padding-left: 20px; }
+        li { margin-bottom: 8px; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9rem;
+        }
+        th, td {
+            border: 1px solid var(--border);
+            padding: 10px;
+            text-align: left;
+        }
+        th { background-color: var(--table-head); color: var(--secondary); }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <button class="theme-toggle" onclick="toggleTheme()">☀️ / 🌙</button>
+        <h1>Rendszerelmélet Vizsga 2025</h1>
+        [cite_start]<span class="subtitle">Teljes, javított kidolgozás [cite: 1-40]</span>
+    </header>
+
+    <div class="topic-card">
+        <div class="topic-header">
+            <h2>1. Jelek és Rendszerek, Konvolúció</h2>
+            <span>Tétel 1</span>
+        </div>
+        [cite_start]<div class="req-badge">Kulcs: Jelek típusai, Linearitás, Időinvariancia, Általánosított derivált, Konvolúció [cite: 2, 3, 4]</div>
+
+        <h3>Fontosabb jelek és tulajdonságaik</h3>
+        <ul>
+            <li><strong>Egységugrás ($\varepsilon(t)$):</strong> Bekapcsolási folyamat. [cite_start]$\varepsilon(t) = 1$, ha $t>0$, különben 0. [cite: 3]</li>
+            <li><strong>Egységimpulzus / Dirac ($\delta(t)$):</strong>
+                $$ \int_{-\infty}^{\infty} x(t)\delta(t) dt = x(0) $$
+                Szitáló tulajdonság. [cite_start]Az egységugrás deriváltja. [cite: 3]</li>
+            <li><strong>Exponenciális jel ($e^{st}$):</strong> Az LTI rendszerek sajátfüggvénye.</li>
+        </ul>
+
+        <h3>Rendszerek tulajdonságai</h3>
+        <ul>
+            <li><strong>Linearitás:</strong> Szuperpozíció elve (Additivitás + Homogenitás). [cite_start]Ha $y_1 = T(u_1)$ és $y_2 = T(u_2)$, akkor $T(c_1 u_1 + c_2 u_2) = c_1 y_1 + c_2 y_2$. [cite: 3]</li>
+            <li><strong>Időinvariancia:</strong> A válasz nem függ a bekapcsolás időpontjától. [cite_start]$y(t-\tau) = T(u(t-\tau))$. [cite: 3]</li>
+            <li><strong>Stabilitás (BIBO):</strong> Korlátos bemenetre korlátos kimenet. [cite_start]Feltétele: $\int_{-\infty}^{\infty} |h(t)| dt < \infty$. [cite: 3]</li>
+        </ul>
+
+        <h3>Általánosított derivált</h3>
+        <p>Szakadással rendelkező jelek (pl. ugrás) deriváltja hagyományosan nem létezik, de elosztás (disztribúció) értelemben igen. Ha $f(t)$-nek $t_0$-ban $K$ nagyságú ugrása van:</p>
+        <div class="formula-box">
+            $$ f'_{alt}(t) = \{f'(t)\} + K \cdot \delta(t-t_0) $$
+        </div>
+        [cite_start]<p>Alkalmazás: Átmeneti függvényből ($v(t)$) súlyfüggvény ($h(t)$) számítása: $h(t) = \dot{v}(t)$. [cite: 4]</p>
+
+        <h3>Konvolúció származtatása és fogalma</h3>
+        <p>LTI rendszereknél a bemenetet elemi impulzusokra bontjuk. A rendszer válasza az elemi impulzusválaszok ($h(t)$) összege.</p>
+        <ul>
+            <li><strong>Konvolúciós integrál (Folytonos):</strong>
+                $$ y(t) = \int_{-\infty}^{\infty} u(\tau) h(t-\tau) d\tau $$
+            </li>
+            <li><strong>Konvolúciós összeg (Diszkrét):</strong>
+                $$ y[n] = \sum_{k=-\infty}^{\infty} u[k] h[n-k] $$
+            </li>
+        </ul>
+        [cite_start]<p>Tulajdonságai: Kommutatív, Asszociatív, Disztributív. [cite: 4]</p>
+    </div>
+
+    <div class="topic-card">
+        <div class="topic-header">
+            <h2>2. LI Rendszerek Reprezentációja</h2>
+            <span>Tétel 2</span>
+        </div>
+        [cite_start]<div class="req-badge">Kulcs: Állapotváltozós leírás, Bode, Nyquist, Sajátértékek [cite: 5-10]</div>
+
+        <h3>Állapotváltozós leírás és Jelfolyam hálózat</h3>
+        <p>A rendszer belső dinamikájának leírása $n$ db elsőrendű differenciálegyenlettel.</p>
+        <div class="formula-box">
+            $$ \dot{\mathbf{x}}(t) = \mathbf{A}\mathbf{x}(t) + \mathbf{B}u(t) $$
+            $$ y(t) = \mathbf{C}\mathbf{x}(t) + \mathbf{D}u(t) $$
+        </div>
+        <p><strong>Sajátértékek szerepe:</strong> Az $\mathbf{A}$ mátrix sajátértékei ($\lambda_i$) határozzák meg a stabilitást. [cite_start]Ha minden $\text{Re}(\lambda_i) < 0$, a rendszer stabil. [cite: 7]</p>
+
+        <h3>Átviteli karakterisztika</h3>
+        <p>Szinuszos gerjesztésre a válasz amplitúdója és fázisa változik.
+           $$ H(j\omega) = |H(j\omega)| e^{j\varphi(\omega)} $$
+           [cite_start]Ábrázolás: <strong>Bode-diagram</strong> (dB amplitúdó és fázis külön) vagy <strong>Nyquist-diagram</strong> (komplex síkon). [cite: 6, 9]</p>
+    </div>
+
+    <div class="topic-card">
+        <div class="topic-header">
+            <h2>3. Fourier-analízis</h2>
+            <span>Tétel 3</span>
+        </div>
+        [cite_start]<div class="req-badge">Kulcs: Fourier-sor, Fourier-trafó, Spektrum, Sávszélesség [cite: 11-14]</div>
+
+        <h3>Fourier-sor (Periodikus jelek)</h3>
+        <p>Periodikus jelek felbonthatók harmonikusok összegére. Spektruma vonalas.</p>
+        <div class="formula-box">
+            $$ x(t) = \sum_{k=-\infty}^{\infty} C_k e^{j k \omega_0 t} $$
+        </div>
+
+        <h3>Fourier-transzformáció (Aperiodikus jelek)</h3>
+        <p>A spektrum folytonossá válik.</p>
+        <div class="formula-box">
+            $$ X(j\omega) = \int_{-\infty}^{\infty} x(t) e^{-j\omega t} dt $$
+        </div>
+        
+        <h3>Alakhű jelátvitel és Sávszélesség</h3>
+        <p>Alakhű átvitel feltétele: konstans amplitúdó-átvitel és lineáris fázis.
+           [cite_start]Sávszélesség: Az a tartomány, ahol az átvitel nem csökken 3 dB alá. [cite: 14]</p>
+    </div>
+
+    <div class="topic-card">
+        <div class="topic-header">
+            <h2>4. Mintavételezés és Laplace</h2>
+            <span>Tétel 4</span>
+        </div>
+        [cite_start]<div class="req-badge">Kulcs: Shannon-tétel, Operátoros megoldás [cite: 15-18]</div>
+
+        <h3>Mintavételezés</h3>
+        <p><strong>Shannon-tétel:</strong> $f_s > 2 f_{max}$. [cite_start]Ha nem teljesül, a spektrumok átlapolódnak (aliasing). [cite: 16]</p>
+
+        <h3>LI Rendszeregyenlet operátoros megoldása</h3>
+        <p>Laplace-transzformációval a differenciálegyenlet algebrai egyenletté válik ($s$ változó).
+           $$ L\{\dot{y}(t)\} = sY(s) - y(0) $$
+           [cite_start]Megoldás menete: Transzformálás $\to$ Átrendezés $Y(s)$-re $\to$ Inverz transzformáció (Parciális törtekre bontás). [cite: 18]</p>
+    </div>
+
+    <div class="topic-card">
+        <div class="topic-header">
+            <h2>5. Diszkrét Rendszerek (Z-trafó)</h2>
+            <span>Tétel 5</span>
+        </div>
+        [cite_start]<div class="req-badge">Kulcs: DFT, DTFT, Z-transzformáció [cite: 19-21]</div>
+
+        <h3>Z-transzformáció</h3>
+        <p>A Laplace diszkrét megfelelője ($z$ változó).
+           $$ X(z) = \sum_{n=-\infty}^{\infty} x[n] z^{-n} $$
+           [cite_start]Kapcsolat a DTFT-vel: Ha $z$ az egységkörön van ($z=e^{j\Omega}$), akkor a Z-transzformált megegyezik a DTFT-vel (spektrummal). [cite: 21]</p>
+    </div>
+
+    <div class="topic-card">
+        <div class="topic-header">
+            <h2>6. Irányítás alapjai</h2>
+            <span>Tétel 6</span>
+        </div>
+        [cite_start]<div class="req-badge">Kulcs: Vezérlés vs Szabályozás, PT1H közelítés [cite: 22-25]</div>
+
+        <h3>Vezérlés és Szabályozás</h3>
+        <ul>
+            <li><strong>Vezérlés:</strong> Nyílt lánc, nincs visszacsatolás, nem kompenzálja a zavarást.</li>
+            [cite_start]<li><strong>Szabályozás:</strong> Zárt kör (negatív visszacsatolás), a hibajelet ($e=r-y$) csökkenti. [cite: 23]</li>
+        </ul>
+
+        <h3>Modellközelítés PT1H szakasszal</h3>
+        <p>Ismeretlen szakasz ugrásválasza alapján közelíthető egy Egytárolós (PT1) + Holtidős (H) taggal:
+           $$ W(s) = \frac{A}{1+sT}e^{-sT_h} $$
+           [cite_start]Ahol $A$ az erősítés, $T$ az időállandó, $T_h$ a holtidő. [cite: 25]</p>
+    </div>
+
+    <div class="topic-card">
+        <div class="topic-header">
+            <h2>7. Stabilitás és Követelmények</h2>
+            <span>Tétel 7</span>
+        </div>
+        [cite_start]<div class="req-badge">Kulcs: Nyquist-kritérium, Tartalékok [cite: 28-31]</div>
+
+        <h3>Negatív visszacsatolás</h3>
+        [cite_start]<p>Csökkenti az erősítést, növeli a sávszélességet, stabilizál. [cite: 30]</p>
+
+        <h3>Nyquist-kritérium és Tartalékok</h3>
+        <p>Stabil a zárt kör, ha a felnyitott kör Nyquist-diagramja <strong>nem veszi körül a $(-1; 0)$ pontot</strong>.
+           [cite_start]<strong>Fázistartalék:</strong> Mennyit késhet még a rendszer a gerjedésig ($180^\circ$-ig) a vágási frekvencián. [cite: 31]</p>
+    </div>
+
+    <div class="topic-card">
+        <div class="topic-header">
+            <h2>8. PID Szabályozó és Típusszám</h2>
+            <span>Tétel 8</span>
+        </div>
+        [cite_start]<div class="req-badge">Kulcs: P-I-D hatások, Windup, Típusszám [cite: 32-35]</div>
+
+        <h3>PID felépítése</h3>
+        <div class="formula-box">
+            $$ u(t) = K_P \left( e(t) + \frac{1}{T_I}\int e(t)dt + T_D \frac{de(t)}{dt} \right) $$
+        </div>
+        [cite_start]<p><strong>Aktuátor telítés (Windup):</strong> Ha a beavatkozó telítésbe megy, az integrátor tovább töltődik ("elszáll"), ami túllendülést okoz. [cite: 34]</p>
+
+        <h3>Típusszám és Maradó hiba</h3>
+        <p>A felnyitott kör integrátorainak száma ($i$) határozza meg a hibát alapjelkövetéskor:
+           Ha $i=0$: Egységugrásra van hiba.
+           [cite_start]Ha $i=1$: Egységugrásra 0 hiba, Sebességugrásra van hiba. [cite: 35]</p>
+    </div>
+
+    <div class="topic-card">
+        <div class="topic-header">
+            <h2>9. PID Hangolás</h2>
+            <span>Tétel 9</span>
+        </div>
+        [cite_start]<div class="req-badge">Kulcs: Derivált szűrése, Lambda-tuning [cite: 36-39]</div>
+
+        <h3>Derivált szűrése</h3>
+        [cite_start]<p>A zajelnyomás miatt a D-tagot szűrni kell ($T_f$ időállandóval): $ \frac{sT_D}{1+sT_f} $. [cite: 38]</p>
+
+        <h3>Hangolási módszerek</h3>
+        <ul>
+            <li><strong>Ziegler-Nichols:</strong> Kísérleti (lengési) módszer.</li>
+            <li><strong>Lambda-tuning:</strong> Modell alapú. [cite_start]A kívánt zárt kör időállandót ($\lambda$) adjuk meg, és a szakasz pólusát kiejtjük a szabályozó zérusával. [cite: 39]</li>
+        </ul>
+    </div>
+
+    <footer>
+        <p>Frissítve: 2025. | Forrás: Relm_temakorok_2025.pdf, Jelek_es_rendszerek.pdf</p>
+    </footer>
+</div>
+
+<script>
+    function toggleTheme() {
+        const body = document.body;
+        const currentTheme = body.getAttribute('data-theme');
+        if (currentTheme === 'dark') {
+            body.removeAttribute('data-theme');
+        } else {
+            body.setAttribute('data-theme', 'dark');
+        }
+    }
+</script>
+
+</body>
+</html>
