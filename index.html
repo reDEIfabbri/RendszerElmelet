@@ -29,11 +29,8 @@
             --card-bg: #ffffff;
             --border: #e5e7eb;
             --code-bg: #f8fafc;
-            --cite-bg: #dbeafe;
-            --cite-text: #1e40af;
             --table-head: #eff6ff;
             --chart-stroke: #1f2937;
-            --chart-fill: #e5e7eb;
         }
 
         [data-theme="dark"] {
@@ -45,11 +42,8 @@
             --card-bg: #1f2937;
             --border: #374151;
             --code-bg: #111827;
-            --cite-bg: #1e3a8a;
-            --cite-text: #93c5fd;
             --table-head: #374151;
             --chart-stroke: #e5e7eb;
-            --chart-fill: #374151;
         }
 
         body {
@@ -108,7 +102,7 @@
         }
 
         h2 { margin: 0; color: var(--primary); font-size: 1.5rem; }
-        h3 { font-size: 1.15rem; margin-top: 35px; border-left: 3px solid var(--accent); padding-left: 10px; color: var(--text); }
+        h3 { font-size: 1.2rem; margin-top: 30px; border-left: 4px solid var(--accent); padding-left: 10px; color: var(--text); border-bottom: 1px solid var(--border); padding-bottom: 5px; width: 100%; display: block;}
 
         .formula-box {
             background: var(--code-bg);
@@ -119,6 +113,14 @@
             border: 1px solid var(--border);
             font-family: 'Latin Modern Math', serif;
             color: var(--text);
+        }
+
+        .definition-box {
+            background-color: var(--code-bg);
+            border-left: 4px solid var(--secondary);
+            padding: 15px;
+            margin: 15px 0;
+            font-style: italic;
         }
 
         /* SVG Ábrák Stílusa */
@@ -139,45 +141,6 @@
         .svg-curve { stroke: var(--primary); stroke-width: 2.5; fill: none; }
         .svg-marker { fill: var(--chart-stroke); }
 
-        /* Hivatkozások */
-        .citation {
-            font-size: 0.75em;
-            vertical-align: super;
-            background-color: var(--cite-bg);
-            color: var(--cite-text);
-            padding: 2px 5px;
-            border-radius: 4px;
-            cursor: help;
-            margin-left: 2px;
-            text-decoration: none;
-            border: 1px solid var(--primary);
-        }
-
-        .citation:hover { background-color: var(--accent); color: white; border-color: var(--accent); }
-        .citation { position: relative; }
-        .citation::after {
-            content: attr(data-source);
-            position: absolute;
-            bottom: 150%;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #333;
-            color: white;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            white-space: pre-wrap;
-            width: 280px;
-            visibility: hidden;
-            opacity: 0;
-            transition: opacity 0.3s;
-            z-index: 100;
-            pointer-events: none;
-            text-align: left;
-            font-weight: normal;
-        }
-        .citation:hover::after { visibility: visible; opacity: 1; }
-
         table {
             width: 100%;
             border-collapse: collapse;
@@ -187,12 +150,10 @@
         th, td { border: 1px solid var(--border); padding: 10px; text-align: left; }
         th { background-color: var(--table-head); color: var(--secondary); }
 
-        .bibliography {
+        footer {
+            text-align: center;
             margin-top: 50px;
-            padding: 20px;
-            background-color: var(--code-bg);
-            border-radius: 8px;
-            border-top: 3px solid var(--text);
+            opacity: 0.7;
             font-size: 0.9rem;
         }
     </style>
@@ -203,18 +164,42 @@
     <header>
         <button class="theme-toggle" onclick="toggleTheme()">☀️ / 🌙</button>
         <h1>Rendszerelmélet 2025</h1>
-        <span class="subtitle">Interaktív ábrákkal kiegészített vizsgaanyag</span>
+        <span class="subtitle">ULTIMATE Kidolgozás: Matematikai Mélyvíz + Vizsgakövetelmények</span>
     </header>
 
     <div class="topic-card">
         <div class="topic-header">
-            <h2>1. Jelek és Rendszerek</h2>
+            <h2>1. Jelek és Rendszerek, Konvolúció</h2>
             <span>Tétel 1</span>
         </div>
-        <p>Jelek típusai: egységugrás, egységimpulzus, szinusz, exponenciális.<a class="citation" data-source="[3] Jelkategóriák...">3</a></p>
-        <p>Konvolúciós integrál (a rendszer "ujjlenyomata" a súlyfüggvény):</p>
+
+        <h3>Jelenergia és Jelteljesítmény</h3>
+        <p>A jelek osztályozása az energiatartalmuk alapján történik:</p>
+        <div class="definition-box">
+            <strong>Energiajel:</strong> Ha az energia véges ($0 < E_\infty < \infty$). Ilyenek a lecsengő, nem periodikus jelek.
+            $$ E_\infty = \lim_{T \to \infty} \int_{-T}^{T} |x(t)|^2 dt $$
+        </div>
+        <div class="definition-box">
+            <strong>Teljesítményjel:</strong> Ha az energia végtelen, de az átlagos teljesítmény véges ($0 < P_\infty < \infty$). Ilyenek a periodikus jelek (pl. szinusz).
+            $$ P_\infty = \lim_{T \to \infty} \frac{1}{2T} \int_{-T}^{T} |x(t)|^2 dt $$
+        </div>
+
+        <h3>A Dirac-delta (Disztribúció) tulajdonságai</h3>
+        <p>A Dirac-impulzus ($\delta(t)$) nem hagyományos függvény, hanem funkcionál. Legfontosabb tulajdonsága a <strong>kiszitálás</strong> (sifting property):</p>
         <div class="formula-box">
-            $$ y(t) = \int_{-\infty}^{\infty} u(\tau) h(t-\tau) d\tau $$
+            $$ \int_{-\infty}^{\infty} x(t) \delta(t-t_0) dt = x(t_0) $$
+        </div>
+        <p>Kapcsolata az egységugrással (általánosított derivált): $\delta(t) = \frac{d\varepsilon(t)}{dt}$.</p>
+
+        <h3>A Konvolúciós Integrál származtatása</h3>
+        <p>A konvolúció logikája LTI rendszereknél:</p>
+        <ol>
+            <li>A bemeneti jelet végtelen sok elemi Dirac-impulzus összegére (integráljára) bontjuk: $x(t) = \int x(\tau)\delta(t-\tau) d\tau$.</li>
+            <li>A rendszer linearitása miatt a kimenet az elemi válaszok (súlyfüggvények) összege.</li>
+            <li>Az időinvariancia miatt a $\delta(t-\tau)$ bemenetre a válasz $h(t-\tau)$.</li>
+        </ol>
+        <div class="formula-box">
+            $$ y(t) = x(t) * h(t) = \int_{-\infty}^{\infty} x(\tau) h(t-\tau) d\tau $$
         </div>
     </div>
 
@@ -224,65 +209,36 @@
             <span>Tétel 2</span>
         </div>
 
-        <h3>Állapotváltozós leírás (SISO)</h3>
-        <p>A rendszer belső állapotai ($x$) kötik össze a bemenetet ($u$) és a kimenetet ($y$).</p>
-
-        <div class="diagram-container">
-            <svg viewBox="0 0 500 200">
-                <defs>
-                    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" class="svg-marker" /></marker>
-                </defs>
-                <rect x="220" y="60" width="60" height="40" class="svg-fill" />
-                <text x="250" y="85" class="svg-text" text-anchor="middle">∫</text>
-                <rect x="220" y="130" width="60" height="40" class="svg-fill" />
-                <text x="250" y="155" class="svg-text" text-anchor="middle">A</text>
-                <rect x="120" y="60" width="40" height="40" class="svg-fill" />
-                <text x="140" y="85" class="svg-text" text-anchor="middle">B</text>
-                <rect x="340" y="60" width="40" height="40" class="svg-fill" />
-                <text x="360" y="85" class="svg-text" text-anchor="middle">C</text>
-                <rect x="230" y="20" width="40" height="30" class="svg-fill" />
-                <text x="250" y="40" class="svg-text" text-anchor="middle">D</text>
-
-                <line x1="20" y1="80" x2="110" y2="80" class="svg-stroke" marker-end="url(#arrow)" />
-                <text x="30" y="70" class="svg-text">u(t)</text>
-                <line x1="160" y1="80" x2="210" y2="80" class="svg-stroke" marker-end="url(#arrow)" />
-                <line x1="280" y1="80" x2="330" y2="80" class="svg-stroke" marker-end="url(#arrow)" />
-                <text x="300" y="70" class="svg-text">x(t)</text>
-                <line x1="380" y1="80" x2="480" y2="80" class="svg-stroke" marker-end="url(#arrow)" />
-                <text x="460" y="70" class="svg-text">y(t)</text>
-
-                <polyline points="310,80 310,150 290,150" class="svg-stroke" marker-end="url(#arrow)" />
-                <polyline points="220,150 190,150 190,80 210,80" class="svg-stroke" marker-end="url(#arrow)" />
-            </svg>
-        </div>
-
+        <h3>Rendszeregyenlet és Megoldása</h3>
+        <p>Az $n$-ed rendű differenciálegyenlet megoldása:</p>
         <div class="formula-box">
-            $$ \dot{x} = Ax + Bu, \quad y = Cx + Du $$
+            $$ a_n y^{(n)} + \dots + a_0 y = b_m u^{(m)} + \dots + b_0 u $$
+        </div>
+        <p>A teljes megoldás = <strong>Homogén megoldás</strong> (saját válasz, $u=0$) + <strong>Partikuláris megoldás</strong> (gerjesztett válasz).</p>
+
+        <h3>Állapotváltozós leírás (State-Space)</h3>
+        <p>Belső változókkal írja le a rendszert. Általános alakja SISO esetben:</p>
+        <div class="formula-box">
+            $$ \dot{x}(t) = Ax(t) + bu(t) $$
+            $$ y(t) = c^T x(t) + du(t) $$
+        </div>
+        <p><strong>Időtartományi megoldás (Mátrixexponenciális):</strong></p>
+        <div class="formula-box">
+            $$ x(t) = e^{A(t-t_0)}x(t_0) + \int_{t_0}^{t} e^{A(t-\tau)}bu(\tau) d\tau $$
         </div>
 
-        <h3>Bode és Nyquist diagramok</h3>
-        <p>A frekvenciafüggvény ábrázolása:</p>
+        <h3>Grafikus ábrázolás (Bode és Nyquist)</h3>
         <div class="diagram-container">
             <svg viewBox="0 0 600 200">
-                <text x="100" y="20" class="svg-text" text-anchor="middle" font-weight="bold">Bode (Ampl.)</text>
+                <text x="100" y="20" class="svg-text" text-anchor="middle" font-weight="bold">Bode (dB)</text>
                 <line x1="20" y1="150" x2="180" y2="150" class="svg-axis" />
                 <line x1="20" y1="150" x2="20" y2="40" class="svg-axis" />
                 <path d="M 20 50 Q 80 50 120 100 T 180 140" class="svg-curve" />
-                <text x="170" y="170" class="svg-text">log ω</text>
-                <text x="10" y="40" class="svg-text">dB</text>
 
-                <text x="300" y="20" class="svg-text" text-anchor="middle" font-weight="bold">Bode (Fázis)</text>
-                <line x1="220" y1="100" x2="380" y2="100" class="svg-axis" />
-                <line x1="220" y1="150" x2="220" y2="40" class="svg-axis" />
-                <path d="M 220 50 Q 280 50 300 100 T 380 140" class="svg-curve" stroke="var(--accent)" />
-                <text x="370" y="120" class="svg-text">log ω</text>
-
-                <text x="500" y="20" class="svg-text" text-anchor="middle" font-weight="bold">Nyquist</text>
-                <line x1="420" y1="100" x2="580" y2="100" class="svg-axis" />
-                <line x1="500" y1="150" x2="500" y2="40" class="svg-axis" />
-                <path d="M 500 100 C 550 50 550 150 500 100 C 450 60 450 140 500 100" class="svg-curve" fill="rgba(37, 99, 235, 0.1)" />
-                <text x="570" y="120" class="svg-text">Re</text>
-                <text x="510" y="50" class="svg-text">Im</text>
+                <text x="400" y="20" class="svg-text" text-anchor="middle" font-weight="bold">Nyquist (Re-Im)</text>
+                <line x1="320" y1="100" x2="480" y2="100" class="svg-axis" />
+                <line x1="400" y1="150" x2="400" y2="40" class="svg-axis" />
+                <path d="M 400 100 C 450 50 450 150 400 100 C 350 60 350 140 400 100" class="svg-curve" fill="none" />
             </svg>
         </div>
     </div>
@@ -293,23 +249,29 @@
             <span>Tétel 3</span>
         </div>
 
-        <h3>Spektrum</h3>
-        <p>A Fourier-sor diszkrét (vonalas) spektrumot ad:</p>
-        <div class="diagram-container">
-            <svg viewBox="0 0 400 120">
-                <line x1="20" y1="100" x2="380" y2="100" class="svg-axis" />
-                <line x1="20" y1="100" x2="20" y2="10" class="svg-axis" />
-                <line x1="50" y1="100" x2="50" y2="40" class="svg-stroke" stroke-width="3" stroke="var(--accent)" />
-                <line x1="100" y1="100" x2="100" y2="60" class="svg-stroke" stroke-width="3" stroke="var(--accent)" />
-                <line x1="150" y1="100" x2="150" y2="80" class="svg-stroke" stroke-width="3" stroke="var(--accent)" />
-                <line x1="200" y1="100" x2="200" y2="90" class="svg-stroke" stroke-width="3" stroke="var(--accent)" />
-                <text x="360" y="115" class="svg-text">f (Hz)</text>
-                <text x="50" y="115" class="svg-text">f0</text>
-                <text x="100" y="115" class="svg-text">2f0</text>
-                <text x="10" y="30" class="svg-text">|Ck|</text>
-            </svg>
+        <h3>Fourier-sor alakjai (Periodikus jelekre)</h3>
+        <p><strong>Komplex alak (Mérnöki):</strong></p>
+        <div class="formula-box">
+            $$ x(t) = \sum_{k=-\infty}^{\infty} C_k e^{j k \omega_0 t}, \quad C_k = \frac{1}{T} \int_{-T/2}^{T/2} x(t) e^{-j k \omega_0 t} dt $$
         </div>
-        <p>Sávkorlátozott jelek és alakhű átvitel (konstans amplitúdó, lineáris fázis).</p>
+        <p><strong>Parseval-tétel:</strong> A jel átlagos teljesítménye megegyezik a harmonikusok teljesítményeinek összegével: $P = \sum |C_k|^2$.</p>
+
+        <h3>Fourier-transzformáció (Aperiodikus jelekre)</h3>
+        <div class="formula-box">
+            $$ X(j\omega) = \int_{-\infty}^{\infty} x(t) e^{-j\omega t} dt $$
+        </div>
+        <p><strong>Tulajdonságok:</strong></p>
+        <ul>
+            <li>Linearitás: $a x_1 + b x_2 \leftrightarrow a X_1 + b X_2$</li>
+            <li>Deriválás: $\frac{dx}{dt} \leftrightarrow j\omega X(j\omega)$</li>
+            <li>Konvolúció: $x(t) * h(t) \leftrightarrow X(j\omega) \cdot H(j\omega)$</li>
+        </ul>
+
+        <h3>Alakhű jelátvitel feltételei</h3>
+        <ol>
+            <li>$|H(j\omega)| = K$ (konstans erősítés a sávban).</li>
+            <li>$\varphi(\omega) = -\omega t_0$ (lineáris fázis = konstans csoportfutási idő).</li>
+        </ol>
     </div>
 
     <div class="topic-card">
@@ -318,18 +280,21 @@
             <span>Tétel 4</span>
         </div>
 
-        <h3>Mintavételezés spektruma (Aliasing)</h3>
-        <p>Ha $f_s < 2f_{max}$, a spektrumok átlapolódnak:</p>
-        <div class="diagram-container">
-            <svg viewBox="0 0 400 100">
-                <line x1="20" y1="90" x2="380" y2="90" class="svg-axis" />
-                <polygon points="50,90 100,20 150,90" fill="rgba(37, 99, 235, 0.3)" stroke="var(--primary)" />
-                <polygon points="130,90 180,20 230,90" fill="rgba(245, 158, 11, 0.3)" stroke="var(--accent)" />
-                <polygon points="250,90 300,20 350,90" fill="rgba(37, 99, 235, 0.3)" stroke="var(--primary)" />
-                <text x="140" y="80" class="svg-text" fill="red" font-weight="bold">!</text>
-                <text x="100" y="10" class="svg-text" text-anchor="middle">Alapsáv</text>
-                <text x="180" y="10" class="svg-text" text-anchor="middle">Ismétlődés</text>
-            </svg>
+        <h3>Matematikai mintavételezés és Shannon-tétel</h3>
+        <p>A mintavételezés a jel szorzása Dirac-fésűvel. Eredmény: A spektrum periodikus ismétlődése $f_s$ frekvenciával.</p>
+        <div class="formula-box">
+            $$ X_m(j\omega) = \frac{1}{T_s} \sum_{k=-\infty}^{\infty} X(j(\omega - k\omega_s)) $$
+        </div>
+        <p><strong>Shannon-tétel:</strong> Ha $f_s < 2f_{max}$, az ismétlődő spektrumok átlapolódnak (Aliasing), az információ elvész.</p>
+
+        <h3>Laplace-transzformáció</h3>
+        <p>A Fourier kiterjesztése ($s = \sigma + j\omega$).</p>
+        <div class="formula-box">
+            $$ X(s) = \int_{0}^{\infty} x(t) e^{-st} dt $$
+        </div>
+        <p><strong>Heaviside-kifejtés (Inverz Laplace):</strong> Racionális törtfüggvények visszatrafozása parciális törtekre bontással.</p>
+        <div class="formula-box">
+            $$ x(t) = \sum_{i=1}^{n} \lim_{s \to p_i} (s-p_i)H(s) e^{p_i t} $$
         </div>
     </div>
 
@@ -338,7 +303,21 @@
             <h2>5. Diszkrét Rendszerek</h2>
             <span>Tétel 5</span>
         </div>
-        <p>DFT, DTFT, Z-transzformáció. Az egységkör szerepe a stabilitásban.</p>
+
+        <h3>DFT és DTFT</h3>
+        <p><strong>DTFT:</strong> Végtelen hosszú jel spektruma (folytonos). <strong>DFT:</strong> Véges jel spektruma (diszkrét).<br>
+            A DFT a DTFT mintavételezett változata a frekvenciatartományban.</p>
+
+        <h3>Z-transzformáció</h3>
+        <div class="formula-box">
+            $$ X(z) = \sum_{n=-\infty}^{\infty} x[n] z^{-n} $$
+        </div>
+        <p><strong>Inverz Z-transzformáció módszerei:</strong></p>
+        <ul>
+            <li>Parciális törtekre bontás (mint Laplace-nál).</li>
+            <li>Hatványsorba fejtés (polinomosztás).</li>
+            <li>Rezumidum-tétel (integrál).</li>
+        </ul>
     </div>
 
     <div class="topic-card">
@@ -348,38 +327,28 @@
         </div>
 
         <h3>Szabályozási kör hatásvázlata</h3>
-        <p>A zárt hatáslánc felépítése:</p>
         <div class="diagram-container">
-            <svg viewBox="0 0 600 120">
-                <defs>
-                    <marker id="arrow2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" class="svg-marker" /></marker>
-                </defs>
-                <circle cx="100" cy="50" r="15" class="svg-fill" />
-                <text x="100" y="55" class="svg-text" text-anchor="middle">+</text>
+            <svg viewBox="0 0 500 100">
+                <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" class="svg-marker" /></marker></defs>
+                <circle cx="80" cy="50" r="15" class="svg-fill" />
+                <text x="80" y="55" class="svg-text" text-anchor="middle">+</text>
+                <rect x="150" y="25" width="60" height="50" class="svg-fill" />
+                <text x="180" y="55" class="svg-text" text-anchor="middle">C</text>
+                <rect x="280" y="25" width="60" height="50" class="svg-fill" />
+                <text x="310" y="55" class="svg-text" text-anchor="middle">P</text>
 
-                <rect x="180" y="25" width="80" height="50" class="svg-fill" />
-                <text x="220" y="55" class="svg-text" text-anchor="middle">C(s)</text>
-                <text x="220" y="20" class="svg-text" text-anchor="middle" font-size="12">Szabályozó</text>
-
-                <rect x="340" y="25" width="80" height="50" class="svg-fill" />
-                <text x="380" y="55" class="svg-text" text-anchor="middle">P(s)</text>
-                <text x="380" y="20" class="svg-text" text-anchor="middle" font-size="12">Szakasz</text>
-
-                <line x1="20" y1="50" x2="80" y2="50" class="svg-stroke" marker-end="url(#arrow2)" />
-                <text x="40" y="40" class="svg-text">r(t)</text>
-
-                <line x1="115" y1="50" x2="175" y2="50" class="svg-stroke" marker-end="url(#arrow2)" />
-                <text x="145" y="40" class="svg-text">e(t)</text>
-
-                <line x1="260" y1="50" x2="335" y2="50" class="svg-stroke" marker-end="url(#arrow2)" />
-                <text x="300" y="40" class="svg-text">u(t)</text>
-
-                <line x1="420" y1="50" x2="520" y2="50" class="svg-stroke" marker-end="url(#arrow2)" />
-                <text x="480" y="40" class="svg-text">y(t)</text>
-
-                <polyline points="460,50 460,100 100,100 100,70" class="svg-stroke" marker-end="url(#arrow2)" />
-                <text x="280" y="115" class="svg-text">Visszacsatolás (-)</text>
+                <line x1="20" y1="50" x2="65" y2="50" class="svg-stroke" marker-end="url(#arrow)" />
+                <line x1="95" y1="50" x2="145" y2="50" class="svg-stroke" marker-end="url(#arrow)" />
+                <line x1="210" y1="50" x2="275" y2="50" class="svg-stroke" marker-end="url(#arrow)" />
+                <line x1="340" y1="50" x2="420" y2="50" class="svg-stroke" marker-end="url(#arrow)" />
+                <polyline points="380,50 380,90 80,90 80,65" class="svg-stroke" marker-end="url(#arrow)" />
             </svg>
+        </div>
+
+        <h3>Modellközelítés PT1H szakasszal</h3>
+        <p>Ugrásválaszból (átmeneti függvényből) meghatározható paraméterek:</p>
+        <div class="formula-box">
+            $$ W(s) = \frac{A}{1+sT} e^{-sT_h} $$
         </div>
     </div>
 
@@ -389,29 +358,14 @@
             <span>Tétel 7</span>
         </div>
 
-        <h3>Stabilitási tartalékok (Bode)</h3>
-        <p>A fázistartalék ($\varphi_t$) és erősítési tartalék ($G_t$) értelmezése:</p>
-        <div class="diagram-container">
-            <svg viewBox="0 0 500 250">
-                <line x1="50" y1="100" x2="450" y2="100" class="svg-axis" stroke-dasharray="4" />
-                <line x1="50" y1="200" x2="450" y2="200" class="svg-axis" stroke-dasharray="4" />
-
-                <text x="40" y="20" class="svg-text">Amplitúdó</text>
-                <path d="M 50 30 Q 200 30 250 100 T 450 150" class="svg-curve" />
-                <text x="260" y="90" class="svg-text" font-weight="bold">wc (vágási frekv.)</text>
-                <circle cx="250" cy="100" r="4" fill="red" />
-
-                <text x="40" y="150" class="svg-text">Fázis (-180°)</text>
-                <path d="M 50 160 Q 200 160 300 200 T 450 230" class="svg-curve" stroke="var(--accent)" />
-
-                <line x1="250" y1="100" x2="250" y2="185" class="svg-stroke" stroke-dasharray="2" />
-                <line x1="250" y1="185" x2="250" y2="200" stroke="green" stroke-width="3" />
-                <text x="260" y="195" class="svg-text" fill="green" font-weight="bold">φt</text>
-
-                <line x1="300" y1="200" x2="300" y2="115" class="svg-stroke" stroke-dasharray="2" />
-                <line x1="300" y1="115" x2="300" y2="100" stroke="purple" stroke-width="3" />
-                <text x="310" y="110" class="svg-text" fill="purple" font-weight="bold">Gt</text>
-            </svg>
+        <h3>Stabilitási tartalékok</h3>
+        <p>A Nyquist-kritérium (nem veheti körül a -1 pontot) alapján definiáljuk a biztonsági tartalékokat:</p>
+        <ul>
+            <li><strong>Fázistartalék ($\varphi_t$):</strong> A vágási frekvencián ($\omega_c$, ahol $|L|=1$) mért távolság a -180°-tól.</li>
+            <li><strong>Erősítési tartalék ($G_t$):</strong> Ahol a fázis -180°, ott mennyivel kisebb az erősítés 1-nél (0 dB-nél).</li>
+        </ul>
+        <div class="formula-box">
+            $$ \varphi_t = 180^\circ + \varphi(\omega_c) $$
         </div>
     </div>
 
@@ -420,9 +374,22 @@
             <h2>8. PID Szabályozó</h2>
             <span>Tétel 8</span>
         </div>
-        <p>PID egyenlete: $ u(t) = K_P e + K_I \int e + K_D \dot{e} $.</p>
-        <p>Integrator Windup: A beavatkozó telítésekor az integrátor túltöltődik.</p>
-        <p>Típusszám és hiba kapcsolata (0, 1, 2 típus).</p>
+
+        <h3>Egyenletek</h3>
+        <div class="formula-box">
+            $$ u(t) = K_P \left( e(t) + \frac{1}{T_I}\int e dt + T_D \frac{de}{dt} \right) $$
+        </div>
+
+        <h3>Típusszám és Hiba ($e_\infty$)</h3>
+        <p>A típusszám ($i$) a rendszerben lévő tiszta integrátorok száma.</p>
+        <table>
+            <thead><tr><th>Típus</th><th>Egységugrás</th><th>Sebességugrás</th><th>Gyorsulásugrás</th></tr></thead>
+            <tbody>
+            <tr><td><strong>0</strong></td><td>Hiba</td><td>$\infty$</td><td>$\infty$</td></tr>
+            <tr><td><strong>1</strong></td><td><strong>0</strong></td><td>Hiba</td><td>$\infty$</td></tr>
+            <tr><td><strong>2</strong></td><td>0</td><td><strong>0</strong></td><td>Hiba</td></tr>
+            </tbody>
+        </table>
     </div>
 
     <div class="topic-card">
@@ -430,17 +397,23 @@
             <h2>9. PID Hangolás</h2>
             <span>Tétel 9</span>
         </div>
-        <p>Ziegler-Nichols (kísérleti) és Lambda-tuning (modell alapú) módszerek.</p>
+
+        <h3>D-tag szűrése</h3>
+        <p>A tiszta deriválás zajérzékeny, ezért PT1 szűrővel látják el ($T_f$).</p>
         <div class="formula-box">
-            $$ D(s) = \frac{sT_D}{1+sT_f} \quad \text{(Szűrt deriválás)} $$
+            $$ D(s) = \frac{sT_D}{1+sT_f} $$
         </div>
+
+        <h3>Hangolás</h3>
+        <ul>
+            <li><strong>Ziegler-Nichols:</strong> Lengési határon alapul.</li>
+            <li><strong>Lambda-tuning:</strong> A zárt kör időállandóját ($\lambda$) tervezzük.</li>
+        </ul>
     </div>
 
-    <div class="bibliography">
-        <strong>Forrásjegyzék:</strong><br>
-        A hivatkozások a <em>Relm_temakorok_2025.pdf</em> dokumentum soraira utalnak.
-        Vidd az egeret a kék számok fölé a részletes szövegért!
-    </div>
+    <footer>
+        <p>Készült a Relm_temakorok_2025.pdf és Jelek_es_rendszerek.pdf alapján.</p>
+    </footer>
 
 </div>
 
