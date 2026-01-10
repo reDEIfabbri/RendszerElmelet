@@ -54,7 +54,7 @@
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg);
             color: var(--text);
-            line-height: 1.6;
+            line-height: 1.8;
             margin: 0;
             padding: 20px;
             transition: all 0.3s ease;
@@ -65,7 +65,7 @@
         header {
             text-align: center;
             margin-bottom: 40px;
-            padding: 40px 20px;
+            padding: 50px 20px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             border-radius: 16px;
@@ -80,7 +80,7 @@
             background: rgba(255, 255, 255, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.4);
             color: white;
-            padding: 6px 12px;
+            padding: 8px 15px;
             border-radius: 20px;
             cursor: pointer;
             font-weight: bold;
@@ -89,11 +89,11 @@
         .topic-card {
             background: var(--card-bg);
             border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 30px;
+            padding: 40px;
+            margin-bottom: 40px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             border: 1px solid var(--border);
-            border-left: 5px solid var(--primary);
+            border-left: 6px solid var(--primary);
         }
 
         .topic-header {
@@ -101,22 +101,34 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 2px solid var(--border);
-            padding-bottom: 15px;
-            margin-bottom: 20px;
+            padding-bottom: 20px;
+            margin-bottom: 25px;
         }
 
-        h2 { margin: 0; color: var(--primary); font-size: 1.6rem; }
-        h3 { font-size: 1.25rem; margin-top: 35px; border-left: 4px solid var(--accent); padding-left: 10px; color: var(--text); border-bottom: 1px solid var(--border); padding-bottom: 5px; display: block; width: 100%;}
+        h2 { margin: 0; color: var(--primary); font-size: 1.8rem; }
+
+        h3 {
+            font-size: 1.3rem;
+            margin-top: 40px;
+            border-left: 5px solid var(--accent);
+            padding-left: 15px;
+            color: var(--text);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 8px;
+            width: 100%;
+            display: block;
+        }
 
         .formula-box {
             background: var(--code-bg);
-            padding: 15px;
+            padding: 20px;
             border-radius: 8px;
-            margin: 15px 0;
+            margin: 20px 0;
             overflow-x: auto;
             border: 1px solid var(--border);
             font-family: 'Latin Modern Math', serif;
             color: var(--text);
+            font-size: 1.1em;
         }
 
         .definition-box {
@@ -127,12 +139,29 @@
             font-style: italic;
         }
 
+        .example-box {
+            background-color: rgba(245, 158, 11, 0.1);
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 0.95em;
+        }
+        .example-title {
+            color: var(--accent);
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            font-size: 0.8em;
+        }
+
         /* SVG Ábrák */
         .diagram-container {
             display: flex;
             justify-content: center;
-            margin: 20px 0;
-            padding: 10px;
+            margin: 30px 0;
+            padding: 15px;
             background: var(--code-bg);
             border-radius: 8px;
             border: 1px solid var(--border);
@@ -168,11 +197,11 @@
             transform: translateX(-50%);
             background-color: #333;
             color: white;
-            padding: 8px 12px;
+            padding: 10px 15px;
             border-radius: 6px;
             font-size: 0.9rem;
             white-space: pre-wrap;
-            width: 280px;
+            width: 300px;
             visibility: hidden;
             opacity: 0;
             transition: opacity 0.3s;
@@ -180,19 +209,20 @@
             pointer-events: none;
             text-align: left;
             font-weight: normal;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
         .citation:hover::after { visibility: visible; opacity: 1; }
 
-        table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.9rem; }
-        th, td { border: 1px solid var(--border); padding: 10px; text-align: left; }
-        th { background-color: var(--table-head); color: var(--secondary); }
+        table { width: 100%; border-collapse: collapse; margin: 25px 0; font-size: 0.95rem; }
+        th, td { border: 1px solid var(--border); padding: 12px; text-align: left; }
+        th { background-color: var(--table-head); color: var(--secondary); font-weight: bold;}
 
         .bibliography {
-            margin-top: 50px;
-            padding: 20px;
+            margin-top: 60px;
+            padding: 25px;
             background-color: var(--code-bg);
             border-radius: 8px;
-            border-top: 3px solid var(--text);
+            border-top: 4px solid var(--text);
             font-size: 0.9rem;
         }
     </style>
@@ -203,7 +233,7 @@
     <header>
         <button class="theme-toggle" onclick="toggleTheme()">☀️ / 🌙</button>
         <h1>Rendszerelmélet 2025</h1>
-        <span class="subtitle">ULTIMATE VIZSGAANYAG (Teljes körű kidolgozás)</span>
+        <span class="subtitle">Bővített Vizsgaanyag (7. Tétel részletezve)</span>
     </header>
 
     <div class="topic-card">
@@ -212,67 +242,58 @@
             <span>Tétel 1</span>
         </div>
 
-        <h3>Fontosabb vizsgálójelek</h3>
-        <p>A rendszerelemzésben használt alapjelek matematikai definíciói:<a class="citation" data-source="[3] Jelkategóriák és tulajdonságaik, fontosabb jelek (egységugrás, egységimpulzus, szinusz, exponenciális stb.).">3</a></p>
+        <h3>1.1. Jelkategóriák és Fontosabb Vizsgálójelek</h3>
+        <p>A jeleket (információhordozó fizikai mennyiségek) energiatartalmuk és időbeli lefolyásuk alapján csoportosítjuk. A rendszervizsgálatban kitüntetett szerepe van a <strong>kauzális jeleknek</strong>, amelyek a $t<0$ tartományban zérus értékűek (bekapcsolási folyamatok).</p>
 
         <div class="definition-box">
-            <strong>Egységugrás ($\varepsilon(t)$):</strong> Bekapcsolási folyamat modellje.
+            <strong>Egységugrás ($\varepsilon(t)$ vagy $1(t)$):</strong> A legegyszerűbb belépő jel.
             $$ \varepsilon(t) = \begin{cases} 1, & \text{ha } t > 0 \\ 0, & \text{ha } t < 0 \end{cases} $$
-            Eltoltja: $\varepsilon(t-\tau)$, ami $t=\tau$-ban vált 0-ról 1-re.
+            Szerepe: Rendszer átmeneti függvényének ($v(t)$) mérése. Eltoltja: $\varepsilon(t-T)$, ami $T$ időpontban kapcsol be.
         </div>
 
         <div class="definition-box">
-            <strong>Dirac-impulzus ($\delta(t)$):</strong> Végtelen rövid idejű, végtelen nagy amplitúdójú jel, melynek területe 1.
-            $$ \int_{-\infty}^{\infty} \delta(t) dt = 1, \quad \delta(t) = 0 \text{ ha } t \neq 0 $$
-            <strong>Szitáló tulajdonság:</strong> Ha megszorzunk egy $f(t)$ függvényt $\delta(t-t_0)$-val és integráljuk, megkapjuk a függvény értékét a $t_0$ helyen:
-            $$ \int_{-\infty}^{\infty} f(t)\delta(t-t_0) dt = f(t_0) $$
+            <strong>Dirac-impulzus ($\delta(t)$):</strong> Matematikai absztrakció, nem valódi függvény, hanem disztribúció.
+            $$ \delta(t) = 0 \text{ ha } t \neq 0, \quad \int_{-\infty}^{\infty} \delta(t) dt = 1 $$
+            Szerepe: Rendszer súlyfüggvényének ($h(t)$) definíciója. Fizikailag egy végtelen rövid, de véges energiájú lökést modellez (pl. kalapácsütés).
         </div>
 
-        <div class="definition-box">
-            <strong>Exponenciális jel ($e^{st}$):</strong> Az LTI rendszerek <em>sajátfüggvénye</em>. Ez azt jelenti, hogy ha a bemenet $e^{st}$, a kimenet is $H(s)e^{st}$ alakú (csak az amplitúdó és fázis változik, az alak nem).
-        </div>
+        <p><strong>Exponenciális jel ($e^{st}$):</strong> Az LTI (Lineáris Időinvariáns) rendszerek <em>sajátfüggvénye</em>. Ez a legfontosabb tulajdonság a rendszertechnikában: ha egy LTI rendszer bemenetére $u(t) = U_0 e^{st}$ jelet adunk, a kimenet is exponenciális lesz: $y(t) = Y_0 e^{st}$, ahol a komplex amplitúdó változik az átviteli függvény szerint.</p>
 
-        <h3>Rendszerek alapvető tulajdonságai</h3>
-        <p>Lineáris Időinvariáns (LTI) rendszerek jellemzői:<a class="citation" data-source="[3] Rendszerek alapvető tulajdonságai (linearitás, időinvariancia, stabilitás)...">3</a></p>
-        <ul>
-            <li><strong>Linearitás (Szuperpozíció):</strong> A válaszok összegegyeznek a gerjesztések összegével.
-                $$ T\{c_1 u_1(t) + c_2 u_2(t)\} = c_1 T\{u_1(t)\} + c_2 T\{u_2(t)\} $$
-            </li>
-            <li><strong>Időinvariancia:</strong> A rendszer paraméterei állandóak, a válasz nem függ a bekapcsolás időpontjától.
-                $$ u(t) \to y(t) \implies u(t-\tau) \to y(t-\tau) $$
-            </li>
-            <li><strong>Stabilitás (BIBO):</strong> Korlátos bemenetre (Bounded Input) korlátos kimenet (Bounded Output) a válasz.
-                Feltétele: A súlyfüggvény abszolút integrálható legyen: $\int_{-\infty}^{\infty} |h(t)| dt < \infty$.
-            </li>
-        </ul>
+        <h3>1.2. Rendszerek alapvető tulajdonságai</h3>
+        <p>Egy $S$ rendszer transzformációt végez a bemenőjelen: $y(t) = S\{u(t)\}$. A legfontosabb osztályozási szempontok:</p>
 
-        <h3>Rendszerek összekapcsolása</h3>
-        <p>Hogyan számoljuk az eredő átvitelt ($H_e$)?<a class="citation" data-source="[3] ...rendszerek összekapcsolása.">3</a></p>
-        <ul>
-            <li><strong>Soros (Kaszkád):</strong> $H_e(s) = H_1(s) \cdot H_2(s)$ (Időtartományban: $h_1 * h_2$).</li>
-            <li><strong>Párhuzamos:</strong> $H_e(s) = H_1(s) + H_2(s)$ (Időtartományban: $h_1 + h_2$).</li>
-            <li><strong>Visszacsatolt (Negatív):</strong> $H_e(s) = \frac{H_1(s)}{1 + H_1(s)H_2(s)}$.</li>
-        </ul>
+        <table style="width:100%">
+            <tr>
+                <th>Tulajdonság</th>
+                <th>Definíció</th>
+                <th>Matematikai feltétel</th>
+            </tr>
+            <tr>
+                <td><strong>Linearitás</strong></td>
+                <td>Érvényes a szuperpozíció elve (additivitás és homogenitás).</td>
+                <td>$S\{a u_1 + b u_2\} = a S\{u_1\} + b S\{u_2\}$</td>
+            </tr>
+            <tr>
+                <td><strong>Időinvariancia</strong></td>
+                <td>A rendszer paraméterei állandóak, a válasz nem függ a kísérlet kezdetétől.</td>
+                <td>Ha $u(t) \to y(t)$, akkor $u(t-\tau) \to y(t-\tau)$</td>
+            </tr>
+            <tr>
+                <td><strong>Stabilitás (BIBO)</strong></td>
+                <td>Korlátos bemenetre (Bounded Input) korlátos kimenet (Bounded Output) keletkezik.</td>
+                <td>$\int_{-\infty}^{\infty} |h(t)| dt < \infty$</td>
+            </tr>
+        </table>
 
-        <h3>Általánosított derivált</h3>
-        <p>Szakadással rendelkező jelek deriváltja elosztás értelemben. Ha $f(t)$-nek $t_0$-ban $K$ nagyságú ugrása van:<a class="citation" data-source="[4] Az általánosított derivált fogalma és alkalmazása.">4</a></p>
+        <h3>1.3. A Konvolúció</h3>
+        <p>A konvolúció az LTI rendszerek alapvető művelete az időtartományban. Azt írja le, hogyan "maszatolja el" a rendszer a bemenő jelet a saját dinamikája (súlyfüggvénye) szerint.</p>
+        <p><strong>Származtatása:</strong>
+            Bármely $u(t)$ jel felírható végtelen sok, egymás mellé tolt, a jel pillanatnyi értékével súlyozott Dirac-impulzus összegeként (szitáló tulajdonság).
+            Mivel a rendszer lineáris, a válasz ($y(t)$) az elemi bemenetekre adott válaszok összege lesz.</p>
+
         <div class="formula-box">
-            $$ f'_{alt}(t) = \{f'(t)\} + K \cdot \delta(t-t_0) $$
+            $$ y(t) = u(t) * h(t) = \int_{-\infty}^{\infty} u(\tau) h(t-\tau) d\tau $$
         </div>
-        <p>Példa: Az egységugrás deriváltja a Dirac-impulzus: $\varepsilon'(t) = \delta(t)$.</p>
-
-        <h3>Konvolúció származtatása</h3>
-        <p>Hogyan kapjuk meg a rendszer válaszát tetszőleges bemenetre?<a class="citation" data-source="[4] Konvolúciós összeg és konvolúciós integrál fogalma és származtatása... tulajdonságai... alkalmazása.">4</a></p>
-        <ol>
-            <li>A bemeneti jelet felbontjuk elemi impulzusokra (Dirac-deltákra).</li>
-            <li>A rendszer válasza egy elemi impulzusra a súlyfüggvény ($h(t)$).</li>
-            <li>A linearitás és időinvariancia miatt a teljes válasz az elemi válaszok összege (integrálja).</li>
-        </ol>
-        <div class="formula-box">
-            $$ y(t) = \int_{-\infty}^{\infty} u(\tau) h(t-\tau) d\tau \quad \text{(Folytonos)} $$
-            $$ y[n] = \sum_{k=-\infty}^{\infty} u[k] h[n-k] \quad \text{(Diszkrét)} $$
-        </div>
-        <p><strong>Tulajdonságok:</strong> Kommutatív ($u*h = h*u$), Asszociatív, Disztributív.</p>
     </div>
 
     <div class="topic-card">
@@ -281,148 +302,124 @@
             <span>Tétel 2</span>
         </div>
 
-        <h3>2.1. Rendszeregyenlet és Megoldása</h3>
-        <p>Az LI rendszerek viselkedését lineáris differenciálegyenlet írja le. Megoldása = Homogén (saját) + Partikuláris (gerjesztett) megoldás.<a class="citation" data-source="[7] Az LI rendszerek rendszeregyenlete, és megoldása különböző gerjesztésekre (ugrás, exponenciális)...">7</a></p>
+        <h3>2.1. A Rendszeregyenlet és Megoldása</h3>
+        <p>Az LI rendszerek dinamikáját állandó együtthatós, lineáris differenciálegyenlet (vagy egyenletrendszer) írja le.</p>
+        <div class="formula-box">
+            $$ a_n \frac{d^n y}{dt^n} + \dots + a_1 \frac{dy}{dt} + a_0 y = b_m \frac{d^m u}{dt^m} + \dots + b_0 u $$
+        </div>
+        <p>A teljes megoldás: $y(t) = y_{hom}(t) + y_{part}(t)$. A homogén rész a sajátértékek által meghatározott tranziens (lecsengő), a partikuláris rész a gerjesztés által fenntartott kényszerválasz.</p>
 
-        <h3>2.2. Sajátértékek szerepe</h3>
-        <p>A karakterisztikus egyenlet gyökei ($\lambda$) határozzák meg a tranziens viselkedést:<a class="citation" data-source="[7] ...sajátértékek szerepe (valós, komplex).">7</a></p>
+        <h3>2.2. Állapotváltozós leírás (State-Space Model)</h3>
+        <p>Nem csak a bemenet-kimenet kapcsolatot (fekete doboz) írja le, hanem a rendszer belső állapotát is. Általános alakja SISO (Single Input Single Output) esetben:</p>
+
+        <div class="formula-box">
+            $$ \dot{\mathbf{x}}(t) = \mathbf{A}\mathbf{x}(t) + \mathbf{B}u(t) \quad \text{(Állapotegyenlet)} $$
+            $$ y(t) = \mathbf{C}\mathbf{x}(t) + \mathbf{D}u(t) \quad \text{(Kimeneti egyenlet)} $$
+        </div>
         <ul>
-            <li><strong>Valós $\lambda < 0$:</strong> Stabil, aperiodikus lecsengés.</li>
-            <li><strong>Komplex $\lambda$ (negatív valós résszel):</strong> Stabil, lengő (oszcilláló) lecsengés.</li>
+            <li>$\mathbf{A}$: Rendszermátrix (meghatározza a sajátértékeket és a dinamikát).</li>
+            <li>$\mathbf{B}$: Bemeneti mátrix (hogyan hat a gerjesztés az állapotokra).</li>
+            <li>$\mathbf{C}$: Kimeneti mátrix (mely állapotokat mérjük).</li>
         </ul>
 
-        <h3>2.3. Állapotváltozós leírás (SISO)</h3>
-        <p>Belső változókkal (állapotokkal) írja le a rendszert. Általános alakja:<a class="citation" data-source="[8] Rendszer állapotváltozós leírásának fogalma és általános alakja SISO esetre.">8</a></p>
+        <h3>2.3. Átviteli karakterisztika (Frekvenciafüggvény)</h3>
+        <p>A frekvenciafüggvény ($H(j\omega)$) a rendszer válasza szinuszos gerjesztésre állandósult állapotban.
+            $$ H(j\omega) = \frac{Y(j\omega)}{U(j\omega)} = |H(j\omega)| \cdot e^{j\varphi(\omega)} $$
+            Számítása az állapotteres modellből: $H(j\omega) = \mathbf{C}(j\omega \mathbf{I} - \mathbf{A})^{-1}\mathbf{B} + \mathbf{D}$.</p>
 
-        <div class="diagram-container">
-            <svg viewBox="0 0 500 200">
-                <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" class="svg-marker" /></marker></defs>
-                <rect x="220" y="60" width="60" height="40" class="svg-fill" /><text x="250" y="85" class="svg-text" text-anchor="middle">∫</text>
-                <rect x="220" y="130" width="60" height="40" class="svg-fill" /><text x="250" y="155" class="svg-text" text-anchor="middle">A</text>
-                <rect x="120" y="60" width="40" height="40" class="svg-fill" /><text x="140" y="85" class="svg-text" text-anchor="middle">B</text>
-                <rect x="340" y="60" width="40" height="40" class="svg-fill" /><text x="360" y="85" class="svg-text" text-anchor="middle">C</text>
-                <rect x="230" y="20" width="40" height="30" class="svg-fill" /><text x="250" y="40" class="svg-text" text-anchor="middle">D</text>
-                <line x1="20" y1="80" x2="110" y2="80" class="svg-stroke" marker-end="url(#arrow)" /><text x="30" y="70" class="svg-text">u(t)</text>
-                <line x1="160" y1="80" x2="210" y2="80" class="svg-stroke" marker-end="url(#arrow)" />
-                <line x1="280" y1="80" x2="330" y2="80" class="svg-stroke" marker-end="url(#arrow)" /><text x="300" y="70" class="svg-text">x(t)</text>
-                <line x1="380" y1="80" x2="480" y2="80" class="svg-stroke" marker-end="url(#arrow)" /><text x="460" y="70" class="svg-text">y(t)</text>
-                <polyline points="310,80 310,150 290,150" class="svg-stroke" marker-end="url(#arrow)" />
-                <polyline points="220,150 190,150 190,80 210,80" class="svg-stroke" marker-end="url(#arrow)" />
-            </svg>
-        </div>
-
-        <div class="formula-box">
-            $$ \dot{x}(t) = Ax(t) + bu(t) \quad \text{(Állapotegyenlet)} $$
-            $$ y(t) = c^T x(t) + du(t) \quad \text{(Kimeneti egyenlet)} $$
-        </div>
-
-        <h3>2.4. Állandósult válasz szinuszos gerjesztésre</h3>
-        <p>Ha egy stabil rendszert $u(t) = A \sin(\omega t)$ jellel gerjesztünk, a kimenet állandósult állapotban:<a class="citation" data-source="[10] LI rendszerek állandósult válaszának számítása szinuszos gerjesztésre.">10</a></p>
-        <div class="formula-box">
-            $$ y_{ss}(t) = A \cdot |H(j\omega)| \cdot \sin(\omega t + \varphi(\omega)) $$
-        </div>
-        <p>Ahol $|H(j\omega)|$ az amplitúdóváltás (erősítés), $\varphi(\omega)$ a fázistolás.</p>
-
-        <h3>2.5. Grafikus ábrázolás</h3>
-        <div class="diagram-container">
-            <svg viewBox="0 0 600 200">
-                <text x="100" y="20" class="svg-text" text-anchor="middle" font-weight="bold">Bode (dB)</text>
-                <line x1="20" y1="150" x2="180" y2="150" class="svg-axis" />
-                <line x1="20" y1="150" x2="20" y2="40" class="svg-axis" />
-                <path d="M 20 50 Q 80 50 120 100 T 180 140" class="svg-curve" />
-                <text x="400" y="20" class="svg-text" text-anchor="middle" font-weight="bold">Nyquist (Re-Im)</text>
-                <line x1="320" y1="100" x2="480" y2="100" class="svg-axis" />
-                <line x1="400" y1="150" x2="400" y2="40" class="svg-axis" />
-                <path d="M 400 100 C 450 50 450 150 400 100 C 350 60 350 140 400 100" class="svg-curve" fill="none" />
-            </svg>
-        </div>
+        <p><strong>Grafikus ábrázolási módok:</strong></p>
+        <ul>
+            <li><strong>Bode-diagram:</strong> Két külön grafikon. Amplitúdó (dB) és Fázis (fok) a frekvencia ($\log \omega$) függvényében.</li>
+            <li><strong>Nyquist-diagram:</strong> A komplex síkon (Re-Im tengelyek) ábrázolja a $H(j\omega)$ vektor végpontjának mozgását.</li>
+        </ul>
     </div>
 
     <div class="topic-card">
         <div class="topic-header">
-            <h2>3. Fourier-analízis</h2>
+            <h2>3. Fourier-analízis és Jelátvitel</h2>
             <span>Tétel 3</span>
         </div>
 
         <h3>3.1. Fourier-sor (Periodikus jelekre)</h3>
-        <p>Periodikus jelek ($T$) felbontása harmonikus összetevőkre.<a class="citation" data-source="[12] FI periodikus jelek Fourier-sora... Fourier-sor különböző alakjai (valós, komplex)...">12</a></p>
+        <p>A Fourier-tétel kimondja, hogy minden fizikailag realizálható, $T$ szerint periodikus jel felbontható harmonikus (alapfrekvenciás és többszörös frekvenciás) szinuszos összetevők összegeként.</p>
+        <p><strong>Komplex (Exponenciális) alak:</strong></p>
         <div class="formula-box">
-            $$ x(t) = \sum_{k=-\infty}^{\infty} C_k e^{j k \omega_0 t}, \quad C_k = \frac{1}{T} \int_{-T/2}^{T/2} x(t) e^{-j k \omega_0 t} dt $$
+            $$ x(t) = \sum_{k=-\infty}^{\infty} C_k e^{j k \omega_0 t} $$
         </div>
-        <p><strong>Parseval-tétel:</strong> A jel teljesítménye megegyezik a harmonikusok teljesítményeinek összegével: $P = \sum |C_k|^2$.</p>
+        <p>Ahol $C_k$ a <strong>vonalas spektrum</strong> együtthatója. $C_k = \frac{1}{T} \int_{-T/2}^{T/2} x(t) e^{-j k \omega_0 t} dt$.</p>
 
         <h3>3.2. Fourier-transzformáció (Aperiodikus jelekre)</h3>
-        <p>Ha $T \to \infty$, a spektrum folytonossá válik.<a class="citation" data-source="[13] FI aperiodikus jelek Fourier-transzformációja... fogalma és származtatása.">13</a></p>
+        <p>Ha a periódusidőt végtelenre növeljük ($T \to \infty$), a spektrumvonalak sűrűsödnek, és a vonalas spektrum átmegy folytonos sűrűségfüggvénybe. Ez a Fourier-transzformáció.</p>
         <div class="formula-box">
-            $$ X(j\omega) = \int_{-\infty}^{\infty} x(t) e^{-j\omega t} dt $$
-        </div>
-        <p><strong>Tulajdonságok:</strong><a class="citation" data-source="[13] Tulajdonságok (linearitás, eltolás, konvolúció stb.).">13</a></p>
-        <ul>
-            <li>Linearitás.</li>
-            <li>Időeltolás: $x(t-t_0) \leftrightarrow X(j\omega)e^{-j\omega t_0}$.</li>
-            <li>Konvolúció tétel: $x(t) * h(t) \leftrightarrow X(j\omega) \cdot H(j\omega)$.</li>
-        </ul>
-
-        <h3>3.3. Alakhű jelátvitel</h3>
-        <p>Feltételei: 1. Konstans amplitúdó-karakterisztika. 2. Lineáris fázis-karakterisztika ($\varphi(\omega) = -\omega t_0$).<a class="citation" data-source="[14] ...alakhű jelátvitel.">14</a></p>
-    </div>
-
-    <div class="topic-card">
-        <div class="topic-header">
-            <h2>4. Mintavételezés és Laplace</h2>
-            <span>Tétel 4</span>
+            $$ X(j\omega) = \mathcal{F}\{x(t)\} = \int_{-\infty}^{\infty} x(t) e^{-j\omega t} dt $$
         </div>
 
-        <h3>4.1. Mintavételezés és Shannon-tétel</h3>
-        <p>Matematikailag: szorzás Dirac-fésűvel. A spektrumban ez periodikus ismétlődést okoz ($f_s$ szerint).<a class="citation" data-source="[16] A matematikai mintavételezés fogalma, mintavételezett jel spektruma...">16</a></p>
-        <p><strong>Shannon-tétel:</strong> Ha $f_s > 2 f_{max}$, az eredeti jel visszaállítható (nincs átlapolódás/aliasing).<a class="citation" data-source="[16] Shannon mintavételi tétele.">16</a></p>
-
-        <h3>4.2. Laplace-transzformáció</h3>
-        <p>A Fourier általánosítása ($s = \sigma + j\omega$).<a class="citation" data-source="[17] A Laplace-transzformáció értelmezése...">17</a></p>
-        <div class="formula-box">
-            $$ X(s) = \int_{0}^{\infty} x(t) e^{-st} dt $$
-        </div>
-
-        <h3>4.3. Operátoros megoldás</h3>
-        <p>A differenciálegyenlet algebrai egyenletté válik. Megoldás menete:<a class="citation" data-source="[18] LI rendszeregyenletek operátoros megoldása, az inverz Laplace... definíciója és módszerei.">18</a></p>
+        <h3>3.3. Sávszélesség és Alakhű átvitel</h3>
+        <p><strong>Alakhű jelátvitel feltételei:</strong> Mikor nem torzul a jel alakja egy rendszeren áthaladva? Ha a rendszer csak késlelteti ($t_0$) és erősíti/gyengíti ($A$) a jelet: $y(t) = A x(t-t_0)$.</p>
         <ol>
-            <li>Transzformálás $s$-tartományba: $L\{\dot{y}\} = sY(s) - y(0)$.</li>
-            <li>Rendezés $Y(s)$-re.</li>
-            <li>Inverz transzformáció (Parciális törtekre bontás + táblázat).</li>
+            <li><strong>Konstans amplitúdókarakterisztika:</strong> $|H(j\omega)| = A$.</li>
+            <li><strong>Lineáris fáziskarakterisztika:</strong> $\varphi(\omega) = -\omega t_0$ (állandó csoportfutási idő).</li>
         </ol>
     </div>
 
     <div class="topic-card">
         <div class="topic-header">
-            <h2>5. Diszkrét Rendszerek</h2>
-            <span>Tétel 5</span>
+            <h2>4. Mintavételezés és Laplace-transzformáció</h2>
+            <span>Tétel 4</span>
         </div>
 
-        <h3>5.1. DFT és DTFT</h3>
-        <p><strong>DTFT:</strong> Végtelen hosszú jel spektruma (folytonos). <strong>DFT:</strong> Véges jel spektruma (diszkrét, számítógépes).<a class="citation" data-source="[20] DTFT... alapvető tulajdonságaik. DFT...">20</a></p>
+        <h3>4.1. Mintavételezés és Shannon-tétel</h3>
+        <p>Az analóg világ digitálisba való átültetésének alapja. Matematikai modellje: a folytonos $x(t)$ jelet megszorozzuk egy $T_s$ periódusidejű Dirac-impulzussorozattal (Dirac-fésű).</p>
+        <p><strong>Shannon mintavételi tétele:</strong> Egy sávkorlátozott jel (melynek legnagyobb frekvenciája $f_{max}$) akkor és csak akkor állítható vissza torzításmentesen a mintáiból, ha a mintavételi frekvencia:
+            $$ f_s > 2 f_{max} $$
+            Ha ez nem teljesül, fellép az <strong>Aliasing</strong> (átlapolódás) jelensége.</p>
 
-        <h3>5.2. Z-transzformáció</h3>
-        <p>A Laplace diszkrét párja. Kapcsolata a DTFT-vel: Az egységkörön ($z=e^{j\Omega}$) megegyeznek.<a class="citation" data-source="[21] A Z-transzformáció értelmezése... és kapcsolata a DTFT-vel.">21</a></p>
+        <h3>4.2. Laplace-transzformáció</h3>
+        <p>A Fourier-transzformáció kiterjesztése a teljes komplex síkra ($s = \sigma + j\omega$). Lehetővé teszi az instabil vagy növekvő jelek (pl. bekapcsolási folyamatok) kezelését is.</p>
         <div class="formula-box">
-            $$ X(z) = \sum_{n=-\infty}^{\infty} x[n] z^{-n} $$
+            $$ X(s) = \mathcal{L}\{x(t)\} = \int_{0}^{\infty} x(t) e^{-st} dt $$
         </div>
 
-        <h3>5.3. Inverz Z-transzformáció módszerei</h3>
-        <p>Az időfüggvény visszaállítása:<a class="citation" data-source="[21] Az inverz Z-transzformáció definíciója és elvégzésének módszerei.">21</a></p>
-        <ul>
-            <li>Parciális törtekre bontás.</li>
-            <li>Hatványsorba fejtés (polinomosztás).</li>
-            <li>Rezumidum-tétel.</li>
-        </ul>
+        <h3>4.3. Operátoros megoldás</h3>
+        <p>A differenciálegyenletek megoldása Laplace-tartományban algebrai egyenletrendezéssé egyszerűsödik.</p>
+        <ol>
+            <li><strong>Transzformálás:</strong> $L\{\dot{y}(t)\} = sY(s) - y(0)$.</li>
+            <li><strong>Rendezés:</strong> Kifejezzük az $Y(s)$-et.</li>
+            <li><strong>Inverz transzformáció:</strong> Racionális törtfüggvények esetén <strong>parciális törtekre bontást</strong>, majd táblázatos visszakeresést (Heaviside-kifejtés) alkalmazunk.</li>
+        </ol>
     </div>
 
     <div class="topic-card">
         <div class="topic-header">
-            <h2>6. Irányítás alapjai</h2>
+            <h2>5. Diszkrét Rendszerek (Z-transzformáció)</h2>
+            <span>Tétel 5</span>
+        </div>
+
+        <h3>5.1. DFT és DTFT</h3>
+        <p>Diszkrét jelek frekvenciaanalízise:</p>
+        <ul>
+            <li><strong>DTFT (Diszkrét Idejű Fourier Transzformáció):</strong> Végtelen hosszú diszkrét jelsorozat spektruma. A spektrum folytonos és $2\pi$ szerint periodikus.</li>
+            <li><strong>DFT (Diszkrét Fourier Transzformáció):</strong> Véges hosszúságú ($N$ elemű) jelsorozatokhoz. A spektruma is diszkrét. Ez számítható számítógéppel (FFT algoritmus).</li>
+        </ul>
+
+        <h3>5.2. Z-transzformáció</h3>
+        <p>A Laplace-transzformáció diszkrét megfelelője. A komplex változó: $z = e^{sT_s}$.</p>
+        <div class="formula-box">
+            $$ X(z) = \mathcal{Z}\{x[n]\} = \sum_{n=-\infty}^{\infty} x[n] z^{-n} $$
+        </div>
+        <p><strong>Inverz Z-transzformáció módszerei:</strong>
+            1. Parciális törtekre bontás (a leggyakoribb).
+            2. Hatványsorba fejtés (polinomosztás).
+            3. Rezumidum-tétel (komplex integrál).</p>
+    </div>
+
+    <div class="topic-card">
+        <div class="topic-header">
+            <h2>6. Irányítás alapjai és Modellközelítés</h2>
             <span>Tétel 6</span>
         </div>
 
-        <h3>6.1. Alkotóelemek és Típusok</h3>
+        <h3>6.1. Az irányítási kör felépítése</h3>
         <div class="diagram-container">
             <svg viewBox="0 0 600 120">
                 <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" class="svg-marker" /></marker></defs>
@@ -436,35 +433,70 @@
                 <polyline points="460,50 460,100 100,100 100,70" class="svg-stroke" marker-end="url(#arrow)" />
             </svg>
         </div>
-        <p>Elemek: Szenzor, Alapjelképző, Szabályozó, Beavatkozó, Szakasz.<a class="citation" data-source="[23] Az irányítórendszer és alkotóelemei.">23</a></p>
-        <ul>
-            <li><strong>Vezérlés:</strong> Nyílt lánc, nincs visszacsatolás.</li>
-            <li><strong>Szabályozás:</strong> Zárt kör, negatív visszacsatolás (zavartűrő).</li>
-        </ul>
+        <p><strong>Alapvető elemek:</strong> Alapjel ($r$), Hibajel ($e = r-y$), Szabályozó ($C$), Szakasz ($P$), Kimenet ($y$).</p>
 
-        <h3>6.2. Jelátviteli tagok</h3>
-        <p>Arányos (P), Integráló (I), Elsőrendű (PT1) tagok.<a class="citation" data-source="[24] Fontosabb jelátviteli tagok (arányos... integráló stb.)...">24</a></p>
-
-        <h3>6.3. Modellközelítés (PT1H)</h3>
-        <p>Ismeretlen rendszer ugrásválaszát közelítjük:<a class="citation" data-source="[25] Ugrásválaszon alapuló modellközelítés (közelítés PT1H szakasszal).">25</a></p>
+        <h3>6.2. Modellközelítés PT1H szakasszal</h3>
+        <p>A gyakorlatban a bonyolult rendszerek ugrásválaszát gyakran közelítjük egy PT1 tagból és egy Holtidőből ($T_h$) álló modellel.</p>
         <div class="formula-box">
-            $$ W(s) = \frac{A}{1+sT} e^{-sT_h} $$
+            $$ W_{modell}(s) = \frac{A}{1+sT} e^{-sT_h} $$
         </div>
+        <p><strong>Identifikáció (Érintő módszer):</strong> Az ugrásválasz inflexiós pontjához húzott érintő metszetei az időtengellyel és a végértékkel adják a $T_h$ és $T$ paramétereket.</p>
     </div>
 
     <div class="topic-card">
         <div class="topic-header">
-            <h2>7. Követelmények és Stabilitás</h2>
+            <h2>7. Stabilitás és Minőségi Követelmények</h2>
             <span>Tétel 7</span>
         </div>
 
-        <h3>7.1. Viselkedés és Visszacsatolás</h3>
-        <p>Statikus (maradó hiba) és dinamikus (túllendülés, beállási idő) jellemzők.<a class="citation" data-source="[29] A szabályozás statikus és dinamikus viselkedésének jellemzése... követelmények.">29</a></p>
-        <p>A negatív visszacsatolás csökkenti az eredő erősítést, javítja a stabilitást.<a class="citation" data-source="[30] A negatív visszacsatolás hatása a rendszer erősítésére.">30</a></p>
+        <h3>7.1. Statikus viselkedés és Követelmények</h3>
+        <p>A szabályozási kör állandósult állapotát vizsgálja ($t \to \infty$). A legfontosabb mérőszám a <strong>maradó hiba</strong> ($e_\infty$), ami a bemenet és a kimenet közötti eltérés hosszú idő után.</p>
 
-        <h3>7.2. Stabilitás és Tartalékok</h3>
-        <p><strong>Egyszerűsített Nyquist-kritérium:</strong> A nyitott kör nem veheti körül a (-1+j0) pontot.<a class="citation" data-source="[31] Stabilitási kritériumok. Az egyszerűsített Nyquist-kritérium...">31</a></p>
-        <p><strong>Tartalékok:</strong> Fázistartalék ($\varphi_t$) és Erősítési tartalék ($G_t$).<a class="citation" data-source="[31] ...stabilitási tartalékok... és azok reprezentációja... Nyquist- és Bode-diagramokban.">31</a></p>
+        <div class="formula-box">
+            $$ e_\infty = \lim_{t \to \infty} e(t) = \lim_{s \to 0} s E(s) \quad \text{(Végértéktétel)} $$
+        </div>
+
+        <p>A statikus hiba függ:</p>
+        <ul>
+            <li><strong>A rendszer típusától (Típusszám):</strong> Hány tiszta integrátor ($\frac{1}{s}$) van a felnyitott körben. Minél több az integrátor, annál pontosabb a rendszer (képes nullára csökkenteni a hibát).</li>
+            <li><strong>A bemenet típusától:</strong> Ugrás ($1(t)$), Sebesség ($t$), vagy Gyorsulás ($t^2$) bemenet. Egy 0-s típusú rendszernek van hibája ugrásbemenetre, egy 1-es típusúnak nincs.</li>
+            <li><strong>A körerősítéstől ($K$):</strong> Nagyobb erősítés csökkenti a statikus hibát (ha nincs integrátor).</li>
+        </ul>
+
+        <h3>7.2. Dinamikus viselkedés és Követelmények</h3>
+        <p>A tranziens (átmeneti) folyamatot írja le, amíg a rendszer eljut az egyik állapotból a másikba. Ezt általában az <strong>egységugrás-válasz</strong> alapján definiáljuk:</p>
+
+        <ul>
+            <li><strong>Beállási idő ($T_{sz}$ vagy $T_s$):</strong> Az az időtartam, amely alatt a kimenet véglegesen a kívánt érték körüli sávba (pl. $\pm 5\%$) kerül. Ez a rendszer gyorsaságának mércéje. Kapcsolatban áll a domináns pólusok valós részével.</li>
+            <li><strong>Maximális túllendülés ($PO$ vagy $\sigma$):</strong> Százalékos érték, amely megmutatja, mennyivel lépi túl a kimenet maximális értéke ($y_{max}$) az állandósult értéket ($y_{ss}$).
+                $$ PO = \frac{y_{max} - y_{ss}}{y_{ss}} \cdot 100\% $$
+                A túllendülés a stabilitási tartalék hiányára utal. Nagy túllendülés $\to$ kis fázistartalék $\to$ lengő viselkedés.
+            </li>
+            <li><strong>Felfutási idő ($T_r$):</strong> Az az idő, ami alatt a jel 10%-ról 90%-ra növekszik.</li>
+        </ul>
+
+        <h3>7.3. A negatív visszacsatolás hatása</h3>
+        <p>Legyen a felnyitott kör átvitele $L(s) = C(s)P(s)$. A zárt kör átviteli függvénye:</p>
+        <div class="formula-box">
+            $$ W_{zárt}(s) = \frac{L(s)}{1+L(s)} $$
+        </div>
+        <p>A visszacsatolás hatásai:</p>
+        <ul>
+            <li><strong>Erősítés csökkenése:</strong> A nyílt lánchoz képest az erősítés csökken, de stabilizálódik.</li>
+            <li><strong>Sávszélesség növelése:</strong> A rendszer gyorsabbá válik.</li>
+            <li><strong>Linearizálás:</strong> A nemlineáris torzítások csökkennek.</li>
+            <li><strong>Zavarelhárítás:</strong> A rendszer képes kompenzálni a külső zavaró jeleket.</li>
+        </ul>
+
+        <h3>7.4. Stabilitás és Nyquist-kritérium</h3>
+        <p>A zárt kör stabilitását a felnyitott kör ($L(s)$) frekvenciafüggvényéből állapítjuk meg.</p>
+        <p><strong>Egyszerűsített Nyquist-kritérium:</strong> Ha a felnyitott kör stabil, akkor a zárt kör akkor és csak akkor stabil, ha a felnyitott kör Nyquist-diagramja ($L(j\omega)$) <strong>nem veszi körül a $(-1; 0)$ pontot</strong> (kritikus pont).</p>
+
+        <p><strong>Stabilitási tartalékok (Biztonsági sáv):</strong></p>
+        <ul>
+            <li><strong>Fázistartalék ($\varphi_t$):</strong> A vágási körfrekvenciánál ($\omega_c$, ahol az erősítés 1), hány fok hiányzik még a -180°-os fázistoláshoz (instabilitáshoz). Cél: $> 60^\circ$.</li>
+            <li><strong>Erősítési tartalék ($G_t$):</strong> Ahol a fázis eléri a -180°-ot, ott hányszorosára növelhető még az erősítés, mielőtt a rendszer instabillá válna.</li>
+        </ul>
 
         <div class="diagram-container">
             <svg viewBox="0 0 500 250">
@@ -472,7 +504,6 @@
                 <line x1="50" y1="200" x2="450" y2="200" class="svg-axis" stroke-dasharray="4" />
                 <text x="40" y="20" class="svg-text">Amplitúdó</text>
                 <path d="M 50 30 Q 200 30 250 100 T 450 150" class="svg-curve" />
-                <text x="260" y="90" class="svg-text" font-weight="bold">wc</text>
                 <text x="40" y="150" class="svg-text">Fázis (-180°)</text>
                 <path d="M 50 160 Q 200 160 300 200 T 450 230" class="svg-curve" stroke="var(--accent)" />
                 <line x1="250" y1="100" x2="250" y2="185" class="svg-stroke" stroke-dasharray="2" />
@@ -484,56 +515,82 @@
 
     <div class="topic-card">
         <div class="topic-header">
-            <h2>8. PID Szabályozó</h2>
+            <h2>8. A PID Szabályozó</h2>
             <span>Tétel 8</span>
         </div>
 
-        <h3>8.1. PID Felépítése</h3>
-        <p>P (Arányos), I (Integráló), D (Deriváló) tagok szerepe.<a class="citation" data-source="[33] A PID szabályozó felépítése, komponenseinek (P, I, D) szerepe.">33</a></p>
+        <h3>8.1. Felépítés és Működés</h3>
+        <p>A legelterjedtebb ipari szabályozó. Három tag párhuzamos kapcsolása:</p>
         <div class="formula-box">
-            $$ C(s) = K_P \left( 1 + \frac{1}{sT_I} + sT_D \right) $$
+            $$ u(t) = K_P \left( e(t) + \frac{1}{T_I} \int_0^t e(\tau) d\tau + T_D \frac{de(t)}{dt} \right) $$
         </div>
+        <ul>
+            <li><strong>P (Arányos):</strong> A jelenbeli hibával arányos. Gyors, de maradó hibát hagyhat.</li>
+            <li><strong>I (Integráló):</strong> A múltbeli hibákat összegzi. Megszünteti a maradó hibát (növeli a típusszámot).</li>
+            <li><strong>D (Deriváló):</strong> A hiba változási sebességére reagál (jövő). Stabilizáló, siettető hatású.</li>
+        </ul>
 
-        <h3>8.2. Integrator Windup</h3>
-        <p>Aktuátor telítés esetén az integrátor "elszáll" (túltöltődik), ami túllendülést okoz.<a class="citation" data-source="[34] A végrehajtó szerv (aktuátor) telítésének hatása az integrátorra.">34</a></p>
+        <h3>8.2. Aktuátor telítés (Integrator Windup)</h3>
+        <p>Ha a beavatkozó szerv eléri a fizikai korlátját (telítésbe megy), a szabályozási kör megszakad. A hiba azonban fennáll, ezért az I-tag tovább integrál, és az értéke "elszáll" (windup). Amikor a hiba előjelet vált, az integrátornak hosszú idő kell a "kisüléshez", ami alatt a rendszer irányíthatatlan és hatalmasat túllendül.</p>
 
-        <h3>8.3. Típusszám és Hiba ($e_\infty$)</h3>
-        <p>A típusszám ($i$) a nyitott körben lévő integrátorok száma.<a class="citation" data-source="[35] A típusszám és a maradó hiba kapcsolata... (egységugrás, sebességugrás...).">35</a></p>
+        <h3>8.3. Típusszám és Maradó hiba</h3>
+        <p>A szabályozási kör <strong>típusszáma</strong> ($i$) a nyitott körben lévő tiszta integrátorok száma. Ez határozza meg a statikus pontosságot.</p>
+
         <table>
-            <thead><tr><th>Típus</th><th>Egységugrás</th><th>Sebességugrás</th><th>Gyorsulásugrás</th></tr></thead>
+            <thead>
+            <tr>
+                <th>Típusszám</th>
+                <th>Egységugrás ($1(t)$)</th>
+                <th>Sebességugrás ($t$)</th>
+                <th>Gyorsulásugrás ($t^2$)</th>
+            </tr>
+            </thead>
             <tbody>
-            <tr><td><strong>0</strong></td><td>Hiba</td><td>$\infty$</td><td>$\infty$</td></tr>
-            <tr><td><strong>1</strong></td><td><strong>0</strong></td><td>Hiba</td><td>$\infty$</td></tr>
-            <tr><td><strong>2</strong></td><td>0</td><td><strong>0</strong></td><td>Hiba</td></tr>
+            <tr>
+                <td><strong>0. típus</strong> (Nincs I tag)</td>
+                <td>Véges hiba ($e \neq 0$)</td>
+                <td>Végtelen hiba</td>
+                <td>Végtelen hiba</td>
+            </tr>
+            <tr>
+                <td><strong>1. típus</strong> (1 db I tag)</td>
+                <td><strong>0 hiba</strong></td>
+                <td>Véges hiba</td>
+                <td>Végtelen hiba</td>
+            </tr>
+            <tr>
+                <td><strong>2. típus</strong> (2 db I tag)</td>
+                <td>0 hiba</td>
+                <td><strong>0 hiba</strong></td>
+                <td>Véges hiba</td>
+            </tr>
             </tbody>
         </table>
     </div>
 
     <div class="topic-card">
         <div class="topic-header">
-            <h2>9. PID Hangolás</h2>
+            <h2>9. PID Hangolás és Frekvenciatartomány</h2>
             <span>Tétel 9</span>
         </div>
 
-        <h3>9.1. D-tag szűrése</h3>
-        <p>A tiszta deriválás zajérzékeny, ezért PT1 szűrővel látják el ($T_f$).<a class="citation" data-source="[38] A derivált tag szűrése és annak hatása az szabályozó viselkedésére.">38</a></p>
+        <h3>9.1. A Deriváló tag szűrése</h3>
+        <p>Az ideális deriváló tag ($sT_D$) erősítése a frekvenciával arányosan nő. Ez a magas frekvenciás mérési zajokat elfogadhatatlan mértékben felerősítené. Ezért a valóságban a D-tagot mindig szűrik egy PT1 taggal:</p>
         <div class="formula-box">
-            $$ D(s) = \frac{sT_D}{1+sT_f} $$
+            $$ D_{real}(s) = \frac{sT_D}{1 + sT_f} \quad (\text{ahol } T_f \approx T_D/10) $$
         </div>
 
-        <h3>9.2. Hangolás</h3>
-        <ul>
-            <li><strong>Ziegler-Nichols:</strong> Kísérleti, a lengési határon alapul.<a class="citation" data-source="[39] Klasszikus PID paraméterbeállítási módszerek.">39</a></li>
-            <li><strong>Lambda-tuning:</strong> Modell alapú, a zárt kör kívánt időállandóját ($\lambda$) tervezzük.<a class="citation" data-source="[39] A lambda-tuning módszer.">39</a></li>
-        </ul>
+        <h3>9.2. Paraméterbeállítási módszerek (Tuning)</h3>
+        <p><strong>Ziegler-Nichols (Klasszikus):</strong>
+            Kísérleti módszer. A P-erősítést addig növeljük, amíg a rendszer állandósult lengésbe nem kezd (kritikus állapot). A kritikus erősítésből ($K_{kr}$) és a lengésidőből ($T_{kr}$) táblázat alapján számoljuk a paramétereket. Hátránya: gyakran túl nagy túllendülést ad.</p>
+
+        <p><strong>Lambda-tuning (Modern):</strong>
+            Modell alapú módszer. A felhasználó megadja a zárt kör kívánt időállandóját ($\lambda$). A módszer úgy számolja a paramétereket, hogy a szabályozó "kiejtse" a szakasz leglassabb pólusát (pólus-zérus kiejtés), és a rendszer a kívánt $\lambda$ sebességgel, lengésmentesen álljon be.</p>
     </div>
 
-    <div class="bibliography">
-        <strong>Forrásjegyzék:</strong><br>
-        A hivatkozások a <em>Relm_temakorok_2025.pdf</em> dokumentum soraira utalnak.
-        Vidd az egeret a kék számok fölé a részletes szövegért!
-    </div>
-
+    <footer>
+        <p>Készült a 2025-ös vizsgakövetelmények alapján.</p>
+    </footer>
 </div>
 
 <script>
