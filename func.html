@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Function Visualizer</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 { margin-bottom: 10px; }
+        p { margin-bottom: 30px; color: #666; }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .legend {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fafafa;
+            border-left: 4px solid #36a2eb;
+        }
+
+        .formula-item {
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Math Function Visualizer</h1>
+    <p>Visualizing multiple functions over the domain $$x \in [-10, 10]$$</p>
+
+    <div class="container">
+        <canvas id="mathChart"></canvas>
+        
+        <div class="legend">
+            <h3>Functions Displayed:</h3>
+            <div class="formula-item">1. <strong>Sine Wave:</strong> $$f(x) = \sin(x)$$</div>
+            <div class="formula-item">2. <strong>Quadratic:</strong> $$f(x) = x^2$$</div>
+            <div class="formula-item">3. <strong>Cubic:</strong> $$f(x) = \frac{1}{10}x^3$$</div>
+            <div class="formula-item">4. <strong>Exponential:</strong> $$f(x) = e^{0.3x}$$</div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const xMin = -10;
+        const xMax = 10;
+        const step = 0.5; // Lower number = smoother lines but more processing
+
+        // Generate X-Axis Labels
+        const labels = [];
+        for (let i = xMin; i <= xMax; i += step) {
+            labels.push(parseFloat(i.toFixed(1))); // toFixed handles floating point errors
+        }
+
+        // Generate Data Points
+        const dataSine = labels.map(x => Math.sin(x));
+        const dataQuadratic = labels.map(x => Math.pow(x, 2));
+        const dataCubic = labels.map(x => (1/10) * Math.pow(x, 3)); // Scaled down to fit chart better
+        const dataExp = labels.map(x => Math.exp(0.3 * x)); // Scaled exp for visibility
+
+        // Render Chart
+        const ctx = document.getElementById('mathChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Sine: sin(x)',
+                        data: dataSine,
+                        borderColor: 'rgb(255, 99, 132)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderWidth: 2,
+                        tension: 0.4, // smooth curves
+                        pointRadius: 0 // hide dots for cleaner look
+                    },
+                    {
+                        label: 'Quadratic: x^2',
+                        data: dataQuadratic,
+                        borderColor: 'rgb(54, 162, 235)',
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        pointRadius: 0
+                    },
+                    {
+                        label: 'Cubic: 0.1x^3',
+                        data: dataCubic,
+                        borderColor: 'rgb(75, 192, 192)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        pointRadius: 0
+                    },
+                    {
+                        label: 'Exponential: e^(0.3x)',
+                        data: dataExp,
+                        borderColor: 'rgb(255, 206, 86)',
+                        backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        pointRadius: 0
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'x value'
+                        },
+                        grid: {
+                            color: '#e0e0e0'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'f(x)'
+                        },
+                        grid: {
+                            color: '#e0e0e0'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
