@@ -3,157 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math Function Visualizer</title>
+    <title>Interactive Math Plotter</title>
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.js"></script>
 
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
-            margin: 0;
-            padding: 20px;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f0f2f5;
             display: flex;
             flex-direction: column;
             align-items: center;
+            padding: 20px;
+            margin: 0;
         }
 
-        h1 { margin-bottom: 10px; }
-        p { margin-bottom: 30px; color: #666; }
+        .controls {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 800px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
 
-        .container {
+        input[type="text"] {
+            flex-grow: 1;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            min-width: 200px;
+        }
+
+        input[type="color"] {
+            height: 40px;
+            width: 50px;
+            border: none;
+            cursor: pointer;
+            background: none;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .btn-add { background-color: #36a2eb; color: white; }
+        .btn-add:hover { background-color: #2581c0; }
+
+        .btn-clear { background-color: #ff6384; color: white; }
+        .btn-clear:hover { background-color: #d94564; }
+
+        .chart-container {
             width: 90%;
             max-width: 800px;
             background: white;
-            padding: 20px;
-            border-radius: 10px;
+            padding: 15px;
+            border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
-        .legend {
-            margin-top: 20px;
-            padding: 15px;
-            background: #fafafa;
-            border-left: 4px solid #36a2eb;
-        }
-
-        .formula-item {
-            margin: 10px 0;
-            font-size: 1.1em;
+        .examples {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
         }
     </style>
 </head>
 <body>
 
-    <h1>Math Function Visualizer</h1>
-    <p>Visualizing multiple functions over the domain $$x \in [-10, 10]$$</p>
+    <h1>Interactive Function Plotter</h1>
 
-    <div class="container">
-        <canvas id="mathChart"></canvas>
+    <div class="controls">
+        <input type="text" id="funcInput" placeholder="Enter function, e.g.: sin(x) + x/2" value="sin(x)">
+        <input type="color" id="colorInput" value="#36a2eb">
+        <button class="btn-add" onclick="addFunction()">Plot Function</button>
+        <button class="btn-clear" onclick="clearChart()">Clear All</button>
         
-        <div class="legend">
-            <h3>Functions Displayed:</h3>
-            <div class="formula-item">1. <strong>Sine Wave:</strong> $$f(x) = \sin(x)$$</div>
-            <div class="formula-item">2. <strong>Quadratic:</strong> $$f(x) = x^2$$</div>
-            <div class="formula-item">3. <strong>Cubic:</strong> $$f(x) = \frac{1}{10}x^3$$</div>
-            <div class="formula-item">4. <strong>Exponential:</strong> $$f(x) = e^{0.3x}$$</div>
+        <div style="width: 100%;" class="examples">
+            Try: <code>x^2</code>, <code>cos(x)</code>, <code>1/x</code>, <code>log(x)</code>, or <code>sqrt(x)</code>
         </div>
     </div>
 
-    <script>
-        // Configuration
-        const xMin = -10;
-        const xMax = 10;
-        const step = 0.5; // Lower number = smoother lines but more processing
+    <div class="chart-container">
+        <canvas id="myChart"></canvas>
+    </div>
 
-        // Generate X-Axis Labels
-        const labels = [];
-        for (let i = xMin; i <= xMax; i += step) {
-            labels.push(parseFloat(i.toFixed(1))); // toFixed handles floating point errors
+    <script>
+        // --- 1. Setup the Chart ---
+        const ctx = document.getElementById('myChart').getContext('2d');
+        
+        // Define X-axis range
+        const xValues = [];
+        for (let x = -10; x <= 10; x += 0.2) {
+            xValues.push(parseFloat(x.toFixed(1)));
         }
 
-        // Generate Data Points
-        const dataSine = labels.map(x => Math.sin(x));
-        const dataQuadratic = labels.map(x => Math.pow(x, 2));
-        const dataCubic = labels.map(x => (1/10) * Math.pow(x, 3)); // Scaled down to fit chart better
-        const dataExp = labels.map(x => Math.exp(0.3 * x)); // Scaled exp for visibility
-
-        // Render Chart
-        const ctx = document.getElementById('mathChart').getContext('2d');
-        const myChart = new Chart(ctx, {
+        const chart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: labels,
-                datasets: [
-                    {
-                        label: 'Sine: sin(x)',
-                        data: dataSine,
-                        borderColor: 'rgb(255, 99, 132)',
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        borderWidth: 2,
-                        tension: 0.4, // smooth curves
-                        pointRadius: 0 // hide dots for cleaner look
-                    },
-                    {
-                        label: 'Quadratic: x^2',
-                        data: dataQuadratic,
-                        borderColor: 'rgb(54, 162, 235)',
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                        borderWidth: 2,
-                        tension: 0.4,
-                        pointRadius: 0
-                    },
-                    {
-                        label: 'Cubic: 0.1x^3',
-                        data: dataCubic,
-                        borderColor: 'rgb(75, 192, 192)',
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderWidth: 2,
-                        tension: 0.4,
-                        pointRadius: 0
-                    },
-                    {
-                        label: 'Exponential: e^(0.3x)',
-                        data: dataExp,
-                        borderColor: 'rgb(255, 206, 86)',
-                        backgroundColor: 'rgba(255, 206, 86, 0.2)',
-                        borderWidth: 2,
-                        tension: 0.4,
-                        pointRadius: 0
-                    }
-                ]
+                labels: xValues,
+                datasets: [] // Start empty
             },
             options: {
                 responsive: true,
-                interaction: {
-                    mode: 'index',
-                    intersect: false,
-                },
+                interaction: { mode: 'index', intersect: false },
                 scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'x value'
-                        },
-                        grid: {
-                            color: '#e0e0e0'
-                        }
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'f(x)'
-                        },
-                        grid: {
-                            color: '#e0e0e0'
-                        }
-                    }
+                    x: { title: { display: true, text: 'x' }, grid: { color: '#f0f0f0' } },
+                    y: { title: { display: true, text: 'f(x)' }, grid: { color: '#f0f0f0' }, min: -10, max: 10 }
                 }
             }
         });
+
+        // --- 2. Function to Add Data ---
+        function addFunction() {
+            const expression = document.getElementById('funcInput').value;
+            const color = document.getElementById('colorInput').value;
+
+            try {
+                // Generate Y values using Math.js
+                // We map over every 'x' in our labels and evaluate the user's expression
+                const yValues = xValues.map(x => {
+                    try {
+                        let scope = { x: x };
+                        return math.evaluate(expression, scope);
+                    } catch (e) {
+                        return null; // Handle division by zero or domain errors gracefully
+                    }
+                });
+
+                // Create the new dataset
+                const newDataset = {
+                    label: `f(x) = ${expression}`,
+                    data: yValues,
+                    borderColor: color,
+                    backgroundColor: color,
+                    borderWidth: 2,
+                    pointRadius: 0,
+                    tension: 0.4
+                };
+
+                // Push to chart and update
+                chart.data.datasets.push(newDataset);
+                chart.update();
+
+                // Generate a random color for the next input for convenience
+                document.getElementById('colorInput').value = '#' + Math.floor(Math.random()*16777215).toString(16);
+
+            } catch (err) {
+                alert("Invalid Function! Please check your syntax.");
+                console.error(err);
+            }
+        }
+
+        // --- 3. Clear Function ---
+        function clearChart() {
+            chart.data.datasets = [];
+            chart.update();
+        }
+
+        // Initialize with one example
+        addFunction(); 
     </script>
 </body>
 </html>
